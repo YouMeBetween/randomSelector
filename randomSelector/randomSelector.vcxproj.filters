@@ -18,5 +18,18 @@
     <ClCompile Include="randomSelector.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="src\items.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="includes\items.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="res\cfg.csv">
+      <Filter>资源文件</Filter>
+    </None>
   </ItemGroup>
 </Project>
