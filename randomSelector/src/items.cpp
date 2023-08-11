@@ -9,9 +9,29 @@
 #include "../includes/items.h"
 using namespace std;
 
-CItems::CItems(string file_dir)
+void CItems::adjustWeights(int choice)
 {
-	ifstream csv_data(file_dir, ios::in);
+	items.at(choice).weight /= 2;
+	if (items.at(choice).weight <= 2) {
+		for (auto iter = items.begin(); iter != items.end(); iter++) {
+			iter->weight *= 2;
+		}
+	}
+}
+
+void CItems::writeCsv()
+{
+	ofstream csv_data("res/cfg.csv", ios::out);
+	csv_data << "项目,权重\n";
+	for (auto iter = items.begin(); iter != items.end(); iter++) {
+		csv_data << iter->name << "," << iter->weight << endl;
+	}
+	csv_data.close();
+}
+
+CItems::CItems()
+{
+	ifstream csv_data("res/cfg.csv", ios::in);
 	string line, word;
 	istringstream sin;
 	vector<string> words;
@@ -42,7 +62,8 @@ vector<Item> CItems::getItems()
 
 string CItems::chooseOne()
 {
-	double total_weight = 0.0, choice = 0.0;
+	double total_weight = 0.0, random_result = 0.0;
+	int choice = -1;
 	vector<double> weight;
 	default_random_engine e;
 	uniform_real_distribution<double> u(0, 1);
@@ -59,12 +80,15 @@ string CItems::chooseOne()
 	weight.erase(weight.begin());
 	e.seed(time(0));
 	do {
-		choice = u(e);
-	} while (fabs(choice) < 1e-6);
+		random_result = u(e);
+	} while (fabs(random_result) < 1e-6);
 	for (auto iter = weight.begin(); iter != weight.end(); iter++) {
-		if (choice <= *iter) {
-			return items.at(distance(weight.begin(), iter)).name;
+		if (random_result <= *iter) {
+			choice = distance(weight.begin(), iter);
+			break;
 		}
 	}
-	return items.back().name;
+	this->adjustWeights(choice);
+	this->writeCsv();
+	return items.at(choice).name;
 }

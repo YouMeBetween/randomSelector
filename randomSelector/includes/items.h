@@ -1,5 +1,5 @@
 #ifndef _ITEMS_H_
-#define _ITEMS_H
+#define _ITEMS_H_
 
 #include <string>
 #include <vector>
@@ -15,8 +15,10 @@ class CItems
 {
 private:
 	vector<Item> items;
+	void adjustWeights(int);
+	void writeCsv();
 public:
-	CItems(string);
+	CItems();
 	vector<Item> getItems();
 	string chooseOne();
 };

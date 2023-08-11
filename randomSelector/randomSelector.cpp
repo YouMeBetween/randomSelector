@@ -9,7 +9,7 @@ string choose(vector<string> *item);
 
 int main()
 {
-    CItems items("res/cfg.csv");
+    CItems items;
     string result = items.chooseOne();
     cout << result;
 }
