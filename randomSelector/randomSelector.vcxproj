@@ -129,9 +129,11 @@
   <ItemGroup>
     <ClCompile Include="randomSelector.cpp" />
     <ClCompile Include="src\items.cpp" />
+    <ClCompile Include="src\mainMenu.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="includes\items.h" />
+    <ClInclude Include="includes\mainMenu.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="res\cfg.csv" />
