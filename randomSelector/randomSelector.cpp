@@ -1,6 +1,6 @@
 ﻿#include <conio.h>
 #include <Windows.h>
-#include "includes/items.h"
+#include "includes/interfaceBase.h"
 #include "includes/mainMenu.h"
 using namespace std;
 
@@ -9,17 +9,19 @@ void hideCursor();
 int main()
 {
     char ch;
+    CInterfaceBase *interface_base;
     CMainMenu main_menu;
+    interface_base = &main_menu;
     hideCursor();
     while (1) {
         if (_kbhit()) {
             ch = _getch();
             if (ch == 72) {
-                main_menu.up();
+                interface_base->up();
             } else if (ch == 80) {
-                main_menu.down();
+                interface_base->down();
             } else if (ch == 13) {
-                main_menu.enter();
+                interface_base->enter();
             }
         }
     }

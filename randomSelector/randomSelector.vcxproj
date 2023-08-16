@@ -128,10 +128,12 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="randomSelector.cpp" />
+    <ClCompile Include="src\interfaceBase.cpp" />
     <ClCompile Include="src\items.cpp" />
     <ClCompile Include="src\mainMenu.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="includes\interfaceBase.h" />
     <ClInclude Include="includes\items.h" />
     <ClInclude Include="includes\mainMenu.h" />
   </ItemGroup>

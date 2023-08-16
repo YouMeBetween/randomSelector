@@ -12,14 +12,6 @@ constexpr int START_INDEX = 0;
 constexpr int QUIT_INDEX = 1;
 constexpr int ARROW_OFFSET = 2;
 
-void CMainMenu::gotoxy(int x, int y)
-{
-	COORD pos = { x, y };
-	HANDLE hOut = GetStdHandle(STD_OUTPUT_HANDLE);
-	SetConsoleCursorPosition(hOut, pos);
-	return;
-}
-
 void CMainMenu::printMenu()
 {
 	cout << "********************************\n";
