@@ -4,6 +4,7 @@
 #include <Windows.h>
 #include "../includes/mainMenu.h"
 #include "../includes/items.h"
+#include "../includes/index.h"
 using namespace std;
 
 constexpr int FIRST_OPTION_LINE = 3;
@@ -83,12 +84,14 @@ void CMainMenu::down()
 	return;
 }
 
-int CMainMenu::enter()
+void CMainMenu::enter(int &next_interface, int &cursor_line)
 {
 	if (line == START_INDEX) {
 		startChoose();
-		return 2;
+		next_interface = RESULT_SHOW_INDEX;
+		cursor_line = NO_LINE;
 	} else if (line == QUIT_INDEX) {
 		quit();
 	}
+	return;
 }

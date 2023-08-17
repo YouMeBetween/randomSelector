@@ -134,6 +134,7 @@
     <ClCompile Include="src\resultShow.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="includes\index.h" />
     <ClInclude Include="includes\interfaceBase.h" />
     <ClInclude Include="includes\items.h" />
     <ClInclude Include="includes\mainMenu.h" />

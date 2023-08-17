@@ -12,6 +12,6 @@ public:
 	CResultShow();
 	virtual void up() {}
 	virtual void down() {}
-	virtual int enter();
+	virtual void enter(int &, int &);
 };
 #endif // !_RESULT_SHOW_H_

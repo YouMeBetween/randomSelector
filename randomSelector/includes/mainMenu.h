@@ -17,6 +17,6 @@ public:
 	void moveCursor(int);
 	virtual void up();
 	virtual void down();
-	virtual int enter();
+	virtual void enter(int &, int &);
 };
 #endif // !_MAIN_MENU_H_

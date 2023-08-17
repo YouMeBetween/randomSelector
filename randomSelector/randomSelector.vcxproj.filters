@@ -44,6 +44,9 @@
     <ClInclude Include="includes\resultShow.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="includes\index.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="res\cfg.csv">

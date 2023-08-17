@@ -2,9 +2,11 @@
 #include <string>
 #include <cstdlib>
 #include "../includes/resultShow.h"
+#include "../includes/index.h"
 using namespace std;
 
 constexpr int HORIZONTAL_LENGTH = 32;
+constexpr int RESULT_LINE = 2;
 
 void CResultShow::show()
 {
@@ -22,11 +24,13 @@ CResultShow::CResultShow()
 {
 	string choice = getItem("choice");
 	show();
-	gotoxy((HORIZONTAL_LENGTH - choice.size()) / 2, 2);
+	gotoxy((HORIZONTAL_LENGTH - choice.size()) / 2, RESULT_LINE);
 	cout << choice;
 }
 
-int CResultShow::enter()
+void CResultShow::enter(int &next_interface, int &cursor_line)
 {
-	return 1;
+	next_interface = MAIN_MENU_INDEX;
+	cursor_line = RESULT_SHOW_LINE_IN_MAIN_MENU;
+	return;
 }

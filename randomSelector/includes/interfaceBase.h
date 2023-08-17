@@ -10,7 +10,7 @@ public:
 	CInterfaceBase() {}
 	virtual void up() {}
 	virtual void down() {}
-	virtual int enter() { return 0; }
+	virtual void enter(int &, int &) {}
 protected:
 	void gotoxy(int, int);
 	string getItem(string);
