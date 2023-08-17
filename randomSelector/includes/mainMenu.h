@@ -16,6 +16,6 @@ public:
 	CMainMenu(int);
 	virtual void up();
 	virtual void down();
-	virtual void enter();
+	virtual int enter();
 };
 #endif // !_MAIN_MENU_H_

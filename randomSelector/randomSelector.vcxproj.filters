@@ -24,6 +24,12 @@
     <ClCompile Include="src\mainMenu.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="src\interfaceBase.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\resultShow.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="includes\items.h">
@@ -35,9 +41,15 @@
     <ClInclude Include="includes\interfaceBase.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="includes\resultShow.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="res\cfg.csv">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="res\cfg.ini">
       <Filter>资源文件</Filter>
     </None>
   </ItemGroup>

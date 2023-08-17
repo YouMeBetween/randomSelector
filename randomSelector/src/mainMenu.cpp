@@ -1,5 +1,6 @@
 #include <iostream>
 #include <algorithm>
+#include <cstdlib>
 #include <Windows.h>
 #include "../includes/mainMenu.h"
 #include "../includes/items.h"
@@ -14,6 +15,7 @@ constexpr int ARROW_OFFSET = 2;
 
 void CMainMenu::printMenu()
 {
+	system("cls");
 	cout << "********************************\n";
 	cout << "*            Ö÷²Ëµ¥            *\n";
 	cout << "********************************\n";
@@ -26,14 +28,12 @@ void CMainMenu::printMenu()
 void CMainMenu::startChoose()
 {
 	CItems items;
-	gotoxy(0, FINAL_LINE);
-	cout << items.chooseOne();
-	exit(0);
+	setItem("choice", items.chooseOne());
 }
 
 void CMainMenu::quit()
 {
-	gotoxy(0, FINAL_LINE);
+	system("cls");
 	exit(0);
 }
 
@@ -81,10 +81,11 @@ void CMainMenu::down()
 	return;
 }
 
-void CMainMenu::enter()
+int CMainMenu::enter()
 {
 	if (line == START_INDEX) {
 		startChoose();
+		return 2;
 	} else if (line == QUIT_INDEX) {
 		quit();
 	}
