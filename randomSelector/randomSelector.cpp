@@ -1,4 +1,5 @@
-﻿#include <conio.h>
+﻿#include <memory>
+#include <conio.h>
 #include <Windows.h>
 #include "includes/interfaceBase.h"
 #include "includes/mainMenu.h"
@@ -11,13 +12,13 @@ constexpr int DOWN_KEY = 80;
 constexpr int ENTER_KET = 13;
 
 void hideCursor();
-void switchInterface(CInterfaceBase *&, int &, int);
+void switchInterface(shared_ptr<CInterfaceBase> &, int &, int);
 
 int main()
 {
 	char ch;
 	int next_interface = MAIN_MENU_INDEX, cursor_line = RESULT_SHOW_LINE_IN_MAIN_MENU;
-	CInterfaceBase *interface_base;
+	shared_ptr<CInterfaceBase> interface_base;
 	switchInterface(interface_base, next_interface, cursor_line);
 	hideCursor();
 	while (1) {
@@ -31,7 +32,6 @@ int main()
 			}
 		}
 		if (next_interface) {
-			delete(interface_base);
 			switchInterface(interface_base, next_interface, cursor_line);
 		}
 	}
@@ -46,17 +46,17 @@ void hideCursor()
 	SetConsoleCursorInfo(handle, &cursorInfo);
 }
 
-void switchInterface(CInterfaceBase *&interface_base, int &next_interface, int cursor_line)
+void switchInterface(shared_ptr<CInterfaceBase> &interface_base, int &next_interface, int cursor_line)
 {
 	switch (next_interface) {
 		default:
 		case MAIN_MENU_INDEX: {
-			CMainMenu *main_menu = new CMainMenu(cursor_line);
+			shared_ptr<CMainMenu> main_menu = make_shared<CMainMenu>(cursor_line);
 			interface_base = main_menu;
 			break;
 		}
 		case RESULT_SHOW_INDEX: {
-			CResultShow *result_show = new CResultShow;
+			shared_ptr<CResultShow> result_show = make_shared<CResultShow>();
 			interface_base = result_show;
 			break;
 		}
