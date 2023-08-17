@@ -55,16 +55,22 @@ CMainMenu::CMainMenu(int x)
 	gotoxy(0, FINAL_LINE);
 }
 
+void CMainMenu::moveCursor(int target)
+{
+	gotoxy(ARROW_OFFSET, FIRST_OPTION_LINE + line);
+	cout << " ";
+	line = target;
+	gotoxy(ARROW_OFFSET, FIRST_OPTION_LINE + line);
+	cout << ">";
+	return;
+}
+
 void CMainMenu::up()
 {
 	if (line <= 0) {
 		return;
 	}
-	gotoxy(ARROW_OFFSET, FIRST_OPTION_LINE + line);
-	cout << " ";
-	line--;
-	gotoxy(ARROW_OFFSET, FIRST_OPTION_LINE + line);
-	cout << ">";
+	moveCursor(line - 1);
 	return;
 }
 
@@ -73,11 +79,7 @@ void CMainMenu::down()
 	if (line >= MAX_INDEX) {
 		return;
 	}
-	gotoxy(ARROW_OFFSET, FIRST_OPTION_LINE + line);
-	cout << " ";
-	line++;
-	gotoxy(ARROW_OFFSET, FIRST_OPTION_LINE + line);
-	cout << ">";
+	moveCursor(line + 1);
 	return;
 }
 

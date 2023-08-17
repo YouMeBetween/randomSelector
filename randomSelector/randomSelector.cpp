@@ -11,23 +11,22 @@ void switchInterface(CInterfaceBase *&, int &);
 int main()
 {
     char ch;
-    int next_interface = 0;
+    int next_interface = 1;
     CInterfaceBase *interface_base;
-    CMainMenu *main_menu = new CMainMenu;
-    interface_base = main_menu;
+    switchInterface(interface_base, next_interface);
     hideCursor();
     while (1) {
         if (_kbhit()) {
             ch = _getch();
-            if (ch == 72) {
-                interface_base->up();
-            } else if (ch == 80) {
-                interface_base->down();
-            } else if (ch == 13) {
-                next_interface = interface_base->enter();
+            switch (ch) {
+                case 72: interface_base->up(); break;
+                case 80: interface_base->down(); break;
+                case 13: next_interface = interface_base->enter(); break;
+                default: break;
             }
         }
         if (next_interface) {
+            delete(interface_base);
             switchInterface(interface_base, next_interface);
         }
     }
@@ -44,9 +43,7 @@ void hideCursor()
 
 void switchInterface(CInterfaceBase *&interface_base, int &next_interface)
 {
-    delete interface_base;
-    switch (next_interface)
-    {
+    switch (next_interface) {
         default:
         case 1: {
             CMainMenu *main_menu = new CMainMenu;

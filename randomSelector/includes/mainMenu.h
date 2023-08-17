@@ -14,6 +14,7 @@ private:
 public:
 	CMainMenu();
 	CMainMenu(int);
+	void moveCursor(int);
 	virtual void up();
 	virtual void down();
 	virtual int enter();
