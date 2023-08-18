@@ -13,7 +13,7 @@ constexpr int MAX_INDEX = 2;
 constexpr int THIS_RESULT_SHOW_INDEX = 0;
 constexpr int THIS_SETTING_INDEX = 1;
 constexpr int THIS_QUIT_INDEX = 2;
-constexpr int ARROW_OFFSET = 2;
+constexpr int ARROW_OFFSET = 8;
 
 void CMainMenu::printMenu()
 {

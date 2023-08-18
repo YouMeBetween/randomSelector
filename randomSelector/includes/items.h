@@ -17,6 +17,7 @@ private:
 	vector<Item> items;
 	void adjustWeights(int);
 	void writeCsv();
+	string getItem(string, string);
 public:
 	CItems();
 	vector<Item> getItems();

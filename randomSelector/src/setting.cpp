@@ -20,12 +20,12 @@ constexpr int ON_OFF_OFFSET = 21;
 constexpr int ARROW_OFFSET = 2;
 
 map<string, vector<int>> on_off_pos = {
-	{"weight_select", {ON_OFF_OFFSET, FIRST_OPTION_LINE + THIS_WEIGHT_SELECT_INDEX}},
-	{"dynamic_weight", {ON_OFF_OFFSET, FIRST_OPTION_LINE + THIS_DYNAMIC_WEIGHT_INDEX}}
+	{"weightSelect", {ON_OFF_OFFSET, FIRST_OPTION_LINE + THIS_WEIGHT_SELECT_INDEX}},
+	{"dynamicWeight", {ON_OFF_OFFSET, FIRST_OPTION_LINE + THIS_DYNAMIC_WEIGHT_INDEX}}
 };
 map<int, string> line_to_name = {
-	{0, "weight_select"},
-	{1, "dynamic_weight"}
+	{0, "weightSelect"},
+	{1, "dynamicWeight"}
 };
 
 void CSetting::onOffShow(string index)
@@ -45,8 +45,9 @@ void CSetting::show()
 	cout << "*   2.动态权重      <  >       *\n";
 	cout << "*   3.返回                     *\n";
 	cout << "********************************\n";
-	onOffShow("weight_select");
-	onOffShow("dynamic_weight");
+	for (auto iter = on_off_pos.begin(); iter != on_off_pos.end(); iter++) {
+		onOffShow(iter->first);
+	}
 	return;
 }
 
@@ -77,6 +78,11 @@ void CSetting::onOffToggle(string index)
 	setting_map[index] = setting_map[index] == "true" ? "false" : "true";
 	setItem("res/setting.ini", index, setting_map[index]);
 	onOffShow(index);
+	if (index == "weightSelect" && setting_map[index] == "false" && setting_map["dynamicWeight"] == "true") {
+		onOffToggle("dynamicWeight");
+	} else if (index == "dynamicWeight" && setting_map[index] == "true" && setting_map["weightSelect"] == "false") {
+		onOffToggle("weightSelect");
+	}
 }
 
 CSetting::CSetting()
