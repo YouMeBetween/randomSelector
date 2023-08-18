@@ -17,9 +17,9 @@ void CInterfaceBase::gotoxy(int x, int y)
 	return;
 }
 
-string CInterfaceBase::getItem(string index)
+string CInterfaceBase::getItem(string file, string index)
 {
-	ifstream ini_data("res/cfg.ini", ios::in);
+	ifstream ini_data(file, ios::in);
 	string line, word, result = "Œ¥’“µΩ";
 	istringstream sin;
 	vector<string> words;
@@ -42,10 +42,10 @@ string CInterfaceBase::getItem(string index)
 	return result;
 }
 
-void CInterfaceBase::setItem(string index, string value)
+void CInterfaceBase::setItem(string file, string index, string value)
 {
 	map<string, string> ini_map;
-	ifstream ini_data_in("res/cfg.ini", ios::in);
+	ifstream ini_data_in(file, ios::in);
 	string line, word;
 	istringstream sin;
 	vector<string> words;
@@ -64,10 +64,18 @@ void CInterfaceBase::setItem(string index, string value)
 	}
 	ini_data_in.close();
 	ini_map[index] = value;
-	ofstream ini_data_out("res/cfg.ini", ios::out);
+	ofstream ini_data_out(file, ios::out);
 	for (auto iter = ini_map.begin(); iter != ini_map.end(); iter++) {
 		ini_data_out << iter->first << ":" << iter->second << endl;
 	}
 	ini_data_out.close();
+	return;
+}
+
+void CInterfaceBase::nextInterfaceSet(int &next_interface, int &cursor_line, int next_interface_target,
+									  int cursor_line_target)
+{
+	next_interface = next_interface_target;
+	cursor_line = cursor_line_target;
 	return;
 }

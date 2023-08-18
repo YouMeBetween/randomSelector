@@ -4,6 +4,7 @@
 #include "includes/interfaceBase.h"
 #include "includes/mainMenu.h"
 #include "includes/resultShow.h"
+#include "includes/setting.h"
 #include "includes/index.h"
 using namespace std;
 
@@ -58,6 +59,11 @@ void switchInterface(shared_ptr<CInterfaceBase> &interface_base, int &next_inter
 		case RESULT_SHOW_INDEX: {
 			shared_ptr<CResultShow> result_show = make_shared<CResultShow>();
 			interface_base = result_show;
+			break;
+		}
+		case SETTING_INDEX: {
+			shared_ptr<CSetting> setting = make_shared<CSetting>(cursor_line);
+			interface_base = setting;
 			break;
 		}
 	}

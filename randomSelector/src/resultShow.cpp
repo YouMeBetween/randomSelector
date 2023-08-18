@@ -22,7 +22,7 @@ void CResultShow::show()
 
 CResultShow::CResultShow()
 {
-	string choice = getItem("choice");
+	string choice = getItem("res/cfg.ini", "choice");
 	show();
 	gotoxy((HORIZONTAL_LENGTH - choice.size()) / 2, RESULT_LINE);
 	cout << choice;
@@ -30,7 +30,6 @@ CResultShow::CResultShow()
 
 void CResultShow::enter(int &next_interface, int &cursor_line)
 {
-	next_interface = MAIN_MENU_INDEX;
-	cursor_line = RESULT_SHOW_LINE_IN_MAIN_MENU;
+	nextInterfaceSet(next_interface, cursor_line, MAIN_MENU_INDEX, RESULT_SHOW_LINE_IN_MAIN_MENU);
 	return;
 }
