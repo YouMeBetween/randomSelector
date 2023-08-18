@@ -102,7 +102,6 @@ void CMainMenu::enter(int &next_interface, int &cursor_line)
 			break;
 		}
 		default:
-			nextInterfaceSet(next_interface, cursor_line, MAIN_MENU_INDEX, RESULT_SHOW_LINE_IN_MAIN_MENU);
 			break;
 	}
 	return;

@@ -10,6 +10,8 @@ using namespace std;
 
 constexpr int UP_KEY = 72;
 constexpr int DOWN_KEY = 80;
+constexpr int LEFT_KEY = 75;
+constexpr int RIGHT_KEY = 77;
 constexpr int ENTER_KET = 13;
 
 void hideCursor();
@@ -28,6 +30,8 @@ int main()
 			switch (ch) {
 				case UP_KEY: interface_base->up(); break;
 				case DOWN_KEY: interface_base->down(); break;
+				case LEFT_KEY: interface_base->left(); break;
+				case RIGHT_KEY: interface_base->right(); break;
 				case ENTER_KET: interface_base->enter(next_interface, cursor_line); break;
 				default: break;
 			}
