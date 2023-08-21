@@ -3,6 +3,7 @@
 #include <cstdlib>
 #include "../includes/resultShow.h"
 #include "../includes/index.h"
+#include "../includes/errorPrompt.h"
 using namespace std;
 
 constexpr int HORIZONTAL_LENGTH = 32;
@@ -23,6 +24,9 @@ void CResultShow::show()
 CResultShow::CResultShow()
 {
 	string choice = getItem("res/cfg.ini", "choice");
+	if (choice == "异常") {
+		CErrorPrompt error_prompt("读取选择结果失败");
+	}
 	show();
 	gotoxy((HORIZONTAL_LENGTH - choice.size()) / 2, RESULT_LINE);
 	cout << choice;

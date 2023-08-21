@@ -16,7 +16,7 @@ public:
 protected:
 	void gotoxy(int, int);
 	string getItem(string, string);
-	void setItem(string, string, string);
+	int setItem(string, string, string);
 	void nextInterfaceSet(int &, int &, int, int);
 };
 #endif // !_INTERFACE_BASE_H_

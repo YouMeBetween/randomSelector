@@ -18,6 +18,7 @@ private:
 	void adjustWeights(int);
 	void writeCsv();
 	string getItem(string, string);
+	bool getOnOffSetting(string);
 public:
 	CItems();
 	vector<Item> getItems();

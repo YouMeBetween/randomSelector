@@ -8,6 +8,7 @@
 #include <cstdlib>
 #include "../includes/setting.h"
 #include "../includes/index.h"
+#include "../includes/errorPrompt.h"
 using namespace std;
 
 constexpr int FIRST_OPTION_LINE = 3;
@@ -76,7 +77,9 @@ void CSetting::getSetting()
 void CSetting::onOffToggle(string index)
 {
 	setting_map[index] = setting_map[index] == "true" ? "false" : "true";
-	setItem("res/setting.ini", index, setting_map[index]);
+	if (setItem("res/setting.ini", index, setting_map[index])) {
+		CErrorPrompt error_prompt("写入设置文件失败");
+	}
 	onOffShow(index);
 	if (index == "weightSelect" && setting_map[index] == "false" && setting_map["dynamicWeight"] == "true") {
 		onOffToggle("dynamicWeight");

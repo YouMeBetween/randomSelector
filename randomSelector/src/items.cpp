@@ -7,6 +7,7 @@
 #include <ctime>
 #include <cmath>
 #include "../includes/items.h"
+#include "../includes/errorPrompt.h"
 using namespace std;
 
 void CItems::adjustWeights(int choice)
@@ -32,12 +33,11 @@ void CItems::writeCsv()
 string CItems::getItem(string file, string index)
 {
 	ifstream ini_data(file, ios::in);
-	string line, word, result = "未找到";
+	string line, word, result = "异常";
 	istringstream sin;
 	vector<string> words;
 	if (!ini_data.is_open()) {
-		cout << "无法打开文件\n";
-		exit(1);
+		return "异常";
 	}
 	while (getline(ini_data, line)) {
 		sin.clear();
@@ -54,6 +54,15 @@ string CItems::getItem(string file, string index)
 	return result;
 }
 
+bool CItems::getOnOffSetting(string index)
+{
+	string ret = getItem("res/setting.ini", index);
+	if (ret == "异常") {
+		CErrorPrompt error_prompt("读取设置文件失败");
+	}
+	return ret == "true";
+}
+
 CItems::CItems()
 {
 	ifstream csv_data("res/cfg.csv", ios::in);
@@ -62,8 +71,7 @@ CItems::CItems()
 	vector<string> words;
 	Item temp;
 	if (!csv_data.is_open()) {
-		cout << "无法打开文件\n";
-		exit(1);
+		CErrorPrompt error_prompt("读取项目文件失败");
 	}
 	getline(csv_data, line);
 	while (getline(csv_data, line)) {
@@ -89,13 +97,13 @@ string CItems::chooseOne()
 {
 	double random_result = 0.0;
 	int choice = -1;
-	bool is_weight_select = getItem("res/setting.ini", "weightSelect") == "true";
-	bool is_dynamic_weight = getItem("res/setting.ini", "dynamicWeight") == "true";
+	bool is_weight_select = getOnOffSetting("weightSelect");
+	bool is_dynamic_weight = getOnOffSetting("dynamicWeight");
 	vector<double> weight;
 	default_random_engine e;
 	uniform_real_distribution<double> u(0, 1);
 	if (items.empty()) {
-		return "没有选项";
+		CErrorPrompt error_prompt("没有待选项");
 	}
 	weight.push_back(0.0);
 	if (is_weight_select) {

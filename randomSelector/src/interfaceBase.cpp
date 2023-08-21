@@ -20,12 +20,11 @@ void CInterfaceBase::gotoxy(int x, int y)
 string CInterfaceBase::getItem(string file, string index)
 {
 	ifstream ini_data(file, ios::in);
-	string line, word, result = "未找到";
+	string line, word, result = "异常";
 	istringstream sin;
 	vector<string> words;
 	if (!ini_data.is_open()) {
-		cout << "无法打开文件\n";
-		exit(1);
+		return "异常";
 	}
 	while (getline(ini_data, line)) {
 		sin.clear();
@@ -36,13 +35,14 @@ string CInterfaceBase::getItem(string file, string index)
 		}
 		if (words[0] == index) {
 			result = words[1];
+			break;
 		}
 	}
 	ini_data.close();
 	return result;
 }
 
-void CInterfaceBase::setItem(string file, string index, string value)
+int CInterfaceBase::setItem(string file, string index, string value)
 {
 	map<string, string> ini_map;
 	ifstream ini_data_in(file, ios::in);
@@ -50,8 +50,7 @@ void CInterfaceBase::setItem(string file, string index, string value)
 	istringstream sin;
 	vector<string> words;
 	if (!ini_data_in.is_open()) {
-		cout << "无法打开文件\n";
-		exit(1);
+		return -1;
 	}
 	while (getline(ini_data_in, line)) {
 		sin.clear();
@@ -69,7 +68,7 @@ void CInterfaceBase::setItem(string file, string index, string value)
 		ini_data_out << iter->first << ":" << iter->second << endl;
 	}
 	ini_data_out.close();
-	return;
+	return 0;
 }
 
 void CInterfaceBase::nextInterfaceSet(int &next_interface, int &cursor_line, int next_interface_target,

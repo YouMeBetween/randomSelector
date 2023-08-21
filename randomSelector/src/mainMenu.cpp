@@ -1,10 +1,12 @@
 #include <iostream>
 #include <algorithm>
+#include <string>
 #include <cstdlib>
 #include <Windows.h>
 #include "../includes/mainMenu.h"
 #include "../includes/items.h"
 #include "../includes/index.h"
+#include "../includes/errorPrompt.h"
 using namespace std;
 
 constexpr int FIRST_OPTION_LINE = 3;
@@ -31,7 +33,9 @@ void CMainMenu::printMenu()
 void CMainMenu::startChoose()
 {
 	CItems items;
-	setItem("res/cfg.ini", "choice", items.chooseOne());
+	if (setItem("res/cfg.ini", "choice", items.chooseOne())) {
+		CErrorPrompt error_prompt("写入选择结果失败");
+	}
 }
 
 void CMainMenu::quit()
