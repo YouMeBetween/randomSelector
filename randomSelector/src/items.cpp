@@ -12,10 +12,14 @@ using namespace std;
 
 void CItems::adjustWeights(int choice)
 {
-	items.at(choice).weight /= 2;
+	if (items.at(choice).min_weight == 0 || items.at(choice).min_weight <= items.at(choice).weight / 2) {
+		items.at(choice).weight /= 2;
+	}
 	if (items.at(choice).weight <= 2) {
 		for (auto iter = items.begin(); iter != items.end(); iter++) {
-			iter->weight *= 2;
+			if (iter->max_weight == 0 || iter->max_weight >= iter->weight * 2) {
+				iter->weight *= 2;
+			}
 		}
 	}
 }
@@ -23,9 +27,9 @@ void CItems::adjustWeights(int choice)
 void CItems::writeCsv()
 {
 	ofstream csv_data("res/cfg.csv", ios::out);
-	csv_data << "项目,权重\n";
+	csv_data << "项目,权重,最低权重,最高权重\n";
 	for (auto iter = items.begin(); iter != items.end(); iter++) {
-		csv_data << iter->name << "," << iter->weight << endl;
+		csv_data << iter->name << "," << iter->weight << "," << iter->min_weight << "," << iter->max_weight << endl;
 	}
 	csv_data.close();
 }
@@ -83,6 +87,8 @@ CItems::CItems()
 		}
 		temp.name = words[0];
 		temp.weight = stoi(words[1]);
+		temp.min_weight = stoi(words[2]);
+		temp.max_weight = stoi(words[3]);
 		items.push_back(temp);
 	}
 	csv_data.close();

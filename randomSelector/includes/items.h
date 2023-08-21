@@ -8,6 +8,8 @@ using namespace std;
 typedef struct Item {
 	string name;
 	int weight{};
+	int min_weight{};
+	int max_weight{};
 	Item() {}
 };
 
