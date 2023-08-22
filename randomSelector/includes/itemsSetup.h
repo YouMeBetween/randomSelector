@@ -1,6 +1,8 @@
 #ifndef _ITEMS_SETUP_H_
 #define _ITEMS_SETUP_H_
+#include <vector>
 #include "interfaceBase.h"
+#include "items.h"
 
 using namespace std;
 
@@ -9,7 +11,9 @@ class CItemsSetup : public CInterfaceBase
 private:
 	int line;
 	int column;
+	vector<Item> items;
 	void show();
+	void displayItems(int);
 	void optionLineMoveCursor(int);
 public:
 	CItemsSetup();
