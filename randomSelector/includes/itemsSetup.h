@@ -11,14 +11,17 @@ class CItemsSetup : public CInterfaceBase
 private:
 	int line;
 	int column;
+	int page;
 	vector<Item> items;
 	void show();
 	void displayItems(int);
 	void optionLineMoveCursor(int);
+	void itemsLineMoveCursor(int);
+	void pageTurningMoveCursor(int);
 public:
 	CItemsSetup();
-	virtual void up() {}
-	virtual void down() {}
+	virtual void up();
+	virtual void down();
 	virtual void left();
 	virtual void right();
 	virtual void enter(int &, int &);
