@@ -100,9 +100,9 @@ void CItemsSetup::itemsLineMoveCursor(int target_line)
 	cout << ">";
 }
 
-void CItemsSetup::pageTurningMoveCursor(int target_column)
+void CItemsSetup::pageTurningMoveCursor(int target_column, bool is_from_items)
 {
-	if (line == ITEMS_LINE_LAST) {
+	if (is_from_items) {
 		gotoxy(ITEMS_ARROW_OFFSET, line);
 	} else {
 		gotoxy(PAGE_TURNING_ARROW_OFFSET + PAGE_TURNING_ARROW_INTERVAL * column, line);
@@ -137,7 +137,11 @@ void CItemsSetup::up()
 	if (line <= OPTION_LINE) {
 		return;
 	} else if (line == PAGE_TURNING_LINE) {
-		itemsLineMoveCursor(ITEMS_LINE_LAST);
+		if (page != (items.size() - 1) / ITEMS_PER_PAGE) {
+			itemsLineMoveCursor(ITEMS_LINE_LAST);
+		} else {
+			itemsLineMoveCursor((items.size() - 1) % ITEMS_PER_PAGE + ITEMS_LINE);
+		}
 	} else if (line == ITEMS_LINE) {
 		optionLineMoveCursor(0);
 	} else {
@@ -151,8 +155,8 @@ void CItemsSetup::down()
 		return;
 	} else if (line == OPTION_LINE) {
 		itemsLineMoveCursor(ITEMS_LINE);
-	} else if (line == ITEMS_LINE_LAST) {
-		pageTurningMoveCursor(0);
+	} else if (line == ITEMS_LINE_LAST || page == items.size() / ITEMS_PER_PAGE && line == (items.size() - 1) % ITEMS_PER_PAGE + ITEMS_LINE) {
+		pageTurningMoveCursor(0, true);
 	} else {
 		itemsLineMoveCursor(line + 1);
 	}
@@ -164,7 +168,7 @@ void CItemsSetup::left()
 		if (line == OPTION_LINE) {
 			optionLineMoveCursor(column - 1);
 		} else if (line == PAGE_TURNING_LINE) {
-			pageTurningMoveCursor(column - 1);
+			pageTurningMoveCursor(column - 1, false);
 		}
 	}
 }
@@ -174,7 +178,7 @@ void CItemsSetup::right()
 	if (line == OPTION_LINE && column < OPTION_LINE_MAX_COLUMN) {
 		optionLineMoveCursor(column + 1);
 	} else if (line == PAGE_TURNING_LINE && column < PAGE_TURNING_LINE_MAX_COLUMN) {
-		pageTurningMoveCursor(column + 1);
+		pageTurningMoveCursor(column + 1, false);
 	}
 }
 
