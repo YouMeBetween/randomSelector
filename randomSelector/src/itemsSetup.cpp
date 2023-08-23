@@ -2,6 +2,7 @@
 #include <vector>
 #include <cstdlib>
 #include "../includes/itemsSetup.h"
+#include "../includes/errorPrompt.h"
 #include "../includes/index.h"
 #include "../includes/items.h"
 using namespace std;
@@ -116,12 +117,19 @@ void CItemsSetup::pageTurningMoveCursor(int target_column)
 CItemsSetup::CItemsSetup()
 {
 	CItems temp;
+	string target_page = getItem("res/cfg.ini", "page");
+	if (target_page == "异常"){
+		CErrorPrompt error_prompt("候选项列表获取失败");
+	}
 	line = OPTION_LINE;
 	column = 0;
-	page = 0;
+	page = stoi(target_page);
+	if (setItem("res/cfg.ini", "page", "0")) {
+		CErrorPrompt error_prompt("打开cfg.ini文件失败");
+	}
 	items = temp.getItems();
 	show();
-	displayItems(0);
+	displayItems(page);
 }
 
 void CItemsSetup::up()

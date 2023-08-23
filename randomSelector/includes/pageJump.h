@@ -6,14 +6,19 @@ using namespace std;
 
 class CPageJump : public CInterfaceBase
 {
+	int line;
 	int type;
 	void show();
+	void showCursor();
+	void hideCursor();
+	void setTargetPage();
+	void moveCursor(int);
 public:
 	CPageJump(int);
-	virtual void up() {}
-	virtual void down() {}
+	virtual void up();
+	virtual void down();
 	virtual void left() {}
 	virtual void right() {}
-	virtual void enter(int &, int &) {}
+	virtual void enter(int &, int &);
 };
 #endif // !_PAGE_JUMP_H_
