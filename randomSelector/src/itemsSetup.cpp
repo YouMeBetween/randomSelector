@@ -45,8 +45,12 @@ void CItemsSetup::show()
 	cout << "****************************************\n";
 }
 
-void CItemsSetup::displayItems(int page)
+void CItemsSetup::displayItems(int target_page)
 {
+	if (target_page < 0 || target_page > (items.size() - 1) / ITEMS_PER_PAGE) {
+		return;
+	}
+	page = target_page;
 	gotoxy(0, ITEMS_LINE);
 	for (int i = 0; i != ITEMS_PER_PAGE; i++) {
 		cout << "*                                      *\n";
@@ -155,7 +159,8 @@ void CItemsSetup::down()
 		return;
 	} else if (line == OPTION_LINE) {
 		itemsLineMoveCursor(ITEMS_LINE);
-	} else if (line == ITEMS_LINE_LAST || page == items.size() / ITEMS_PER_PAGE && line == (items.size() - 1) % ITEMS_PER_PAGE + ITEMS_LINE) {
+	} else if (line == ITEMS_LINE_LAST ||
+				page == items.size() / ITEMS_PER_PAGE && line == (items.size() - 1) % ITEMS_PER_PAGE + ITEMS_LINE) {
 		pageTurningMoveCursor(0, true);
 	} else {
 		itemsLineMoveCursor(line + 1);
@@ -194,9 +199,9 @@ void CItemsSetup::enter(int &next_interface, int &cursor_line)
 		}
 	} else if (line == PAGE_TURNING_LINE) {
 		if (column == THIS_PREV_COLUMN_INDEX && page > 0) {
-			displayItems(--page);
+			displayItems(page - 1);
 		} else if (column == THIS_NEXT_COLUMN_INDEX && page < items.size() / ITEMS_PER_PAGE + 1) {
-			displayItems(++page);
+			displayItems(page + 1);
 		}
 	}
 }
