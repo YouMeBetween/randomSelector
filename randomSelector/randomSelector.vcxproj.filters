@@ -33,6 +33,15 @@
     <ClCompile Include="src\setting.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="src\errorPrompt.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\itemsSetup.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\pageJump.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="includes\items.h">
@@ -51,6 +60,15 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="includes\setting.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\errorPrompt.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\itemsSetup.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\pageJump.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

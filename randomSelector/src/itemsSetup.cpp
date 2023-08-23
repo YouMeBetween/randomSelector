@@ -23,6 +23,8 @@ constexpr int WEIGHT_OFFSET = 22;
 constexpr int MIN_WEIGHT_OFFSET = 28;
 constexpr int WAVY_LINE_OFFSET = 31;
 constexpr int MAX_WEIGHT_OFFSET = 34;
+constexpr int THIS_SEARCH_COLUMN_INDEX = 0;
+constexpr int THIS_JUMP_COLUMN_INDEX = 1;
 constexpr int THIS_BACK_COLUMN_INDEX = 2;
 constexpr int THIS_PREV_COLUMN_INDEX = 0;
 constexpr int THIS_NEXT_COLUMN_INDEX = 1;
@@ -171,7 +173,11 @@ void CItemsSetup::right()
 void CItemsSetup::enter(int &next_interface, int &cursor_line)
 {
 	if (line == OPTION_LINE) {
-		if (column == THIS_BACK_COLUMN_INDEX) {
+		if (column == THIS_SEARCH_COLUMN_INDEX) {
+			nextInterfaceSet(next_interface, cursor_line, PAGE_JUMP_INDEX, THIS_SEARCH_COLUMN_INDEX);
+		} else if (column == THIS_JUMP_COLUMN_INDEX) {
+			nextInterfaceSet(next_interface, cursor_line, PAGE_JUMP_INDEX, THIS_JUMP_COLUMN_INDEX);
+		} else if (column == THIS_BACK_COLUMN_INDEX) {
 			nextInterfaceSet(next_interface, cursor_line, MAIN_MENU_INDEX, ITEMS_SETUP_IN_MAIN_MENU);
 		}
 	} else if (line == PAGE_TURNING_LINE) {
