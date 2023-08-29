@@ -1,4 +1,5 @@
 #include <iostream>
+#include <iomanip>
 #include <vector>
 #include <cstdlib>
 #include "../includes/itemsSetup.h"
@@ -17,13 +18,15 @@ constexpr int PAGE_TURNING_LINE_MAX_COLUMN = 1;
 constexpr int OPTION_LINE_ARROW_OFFSET = 6;
 constexpr int OPTION_LINE_ARROW_INTERVAL = 10;
 constexpr int ITEMS_ARROW_OFFSET = 3;
-constexpr int PAGE_TURNING_ARROW_OFFSET = 8;
-constexpr int PAGE_TURNING_ARROW_INTERVAL = 14;
+constexpr int PAGE_TURNING_ARROW_OFFSET = 5;
+constexpr int PAGE_TURNING_ARROW_INTERVAL = 20;
 constexpr int ITEMS_OFFSET = 5;
 constexpr int WEIGHT_OFFSET = 22;
 constexpr int MIN_WEIGHT_OFFSET = 28;
 constexpr int WAVY_LINE_OFFSET = 31;
 constexpr int MAX_WEIGHT_OFFSET = 34;
+constexpr int CURRENT_PAGE_OFFSET = 17;
+constexpr int TOTAL_PAGE_OFFSET = 21;
 constexpr int THIS_SEARCH_COLUMN_INDEX = 0;
 constexpr int THIS_JUMP_COLUMN_INDEX = 1;
 constexpr int THIS_BACK_COLUMN_INDEX = 2;
@@ -41,7 +44,7 @@ void CItemsSetup::show()
 	for (int i = 0; i != ITEMS_PER_PAGE; i++) {
 		cout << "*                                      *\n";
 	}
-	cout << "*         上一页        下一页         *\n";
+	cout << "*      上一页      ||      下一页      *\n";
 	cout << "****************************************\n";
 }
 
@@ -72,6 +75,14 @@ void CItemsSetup::displayItems(int target_page)
 			cout << items.at(static_cast<unsigned long long>(page) * ITEMS_PER_PAGE + i).max_weight;
 		}
 	}
+	gotoxy(CURRENT_PAGE_OFFSET, PAGE_TURNING_LINE);
+	cout << "  ";
+	gotoxy(CURRENT_PAGE_OFFSET, PAGE_TURNING_LINE);
+	cout << std::right << setw(2) << page + 1;
+	gotoxy(TOTAL_PAGE_OFFSET, PAGE_TURNING_LINE);
+	cout << "  ";
+	gotoxy(TOTAL_PAGE_OFFSET, PAGE_TURNING_LINE);
+	cout << (items.size() - 1) / ITEMS_PER_PAGE + 1;
 }
 
 void CItemsSetup::optionLineMoveCursor(int target_column)

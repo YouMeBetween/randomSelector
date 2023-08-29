@@ -10,12 +10,14 @@
 #include "../includes/errorPrompt.h"
 using namespace std;
 
+constexpr int MIN_WEIGHT = 1;
+
 void CItems::adjustWeights(int choice)
 {
 	if (items.at(choice).min_weight == 0 || items.at(choice).min_weight <= items.at(choice).weight / 2) {
 		items.at(choice).weight /= 2;
 	}
-	if (items.at(choice).weight <= 2) {
+	if (items.at(choice).weight <= MIN_WEIGHT) {
 		for (auto iter = items.begin(); iter != items.end(); iter++) {
 			if (iter->max_weight == 0 || iter->max_weight >= iter->weight * 2) {
 				iter->weight *= 2;
