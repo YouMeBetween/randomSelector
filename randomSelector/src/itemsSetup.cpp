@@ -13,10 +13,10 @@ constexpr int OPTION_LINE = 3;
 constexpr int ITEMS_LINE = 5;
 constexpr int ITEMS_LINE_LAST = 9;
 constexpr int PAGE_TURNING_LINE = 10;
-constexpr int OPTION_LINE_MAX_COLUMN = 2;
+constexpr int OPTION_LINE_MAX_COLUMN = 3;
 constexpr int PAGE_TURNING_LINE_MAX_COLUMN = 1;
-constexpr int OPTION_LINE_ARROW_OFFSET = 6;
-constexpr int OPTION_LINE_ARROW_INTERVAL = 10;
+constexpr int OPTION_LINE_ARROW_OFFSET = 4;
+constexpr int OPTION_LINE_ARROW_INTERVAL = 8;
 constexpr int ITEMS_ARROW_OFFSET = 3;
 constexpr int PAGE_TURNING_ARROW_OFFSET = 5;
 constexpr int PAGE_TURNING_ARROW_INTERVAL = 20;
@@ -29,7 +29,8 @@ constexpr int CURRENT_PAGE_OFFSET = 17;
 constexpr int TOTAL_PAGE_OFFSET = 21;
 constexpr int THIS_SEARCH_COLUMN_INDEX = 0;
 constexpr int THIS_JUMP_COLUMN_INDEX = 1;
-constexpr int THIS_BACK_COLUMN_INDEX = 2;
+constexpr int THIS_ADD_ITEMS_INDEX = 2;
+constexpr int THIS_BACK_COLUMN_INDEX = 3;
 constexpr int THIS_PREV_COLUMN_INDEX = 0;
 constexpr int THIS_NEXT_COLUMN_INDEX = 1;
 
@@ -39,7 +40,7 @@ void CItemsSetup::show()
 	cout << "****************************************\n";
 	cout << "*               选项设置               *\n";
 	cout << "****************************************\n";
-	cout << "*     > 搜索      跳转      返回       *\n";
+	cout << "*   > 搜索    跳转    新增    返回     *\n";
 	cout << "*       项目         权重   权重范围   *\n";
 	for (int i = 0; i != ITEMS_PER_PAGE; i++) {
 		cout << "*                                      *\n";
@@ -205,6 +206,8 @@ void CItemsSetup::enter(int &next_interface, int &cursor_line)
 			nextInterfaceSet(next_interface, cursor_line, PAGE_JUMP_INDEX, THIS_SEARCH_COLUMN_INDEX);
 		} else if (column == THIS_JUMP_COLUMN_INDEX) {
 			nextInterfaceSet(next_interface, cursor_line, PAGE_JUMP_INDEX, THIS_JUMP_COLUMN_INDEX);
+		} else if (column == THIS_ADD_ITEMS_INDEX) {
+			nextInterfaceSet(next_interface, cursor_line, ADD_ITEMS_INDEX, NO_LINE);
 		} else if (column == THIS_BACK_COLUMN_INDEX) {
 			nextInterfaceSet(next_interface, cursor_line, MAIN_MENU_INDEX, ITEMS_SETUP_IN_MAIN_MENU);
 		}

@@ -128,6 +128,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="randomSelector.cpp" />
+    <ClCompile Include="src\addItems.cpp" />
     <ClCompile Include="src\errorPrompt.cpp" />
     <ClCompile Include="src\interfaceBase.cpp" />
     <ClCompile Include="src\items.cpp" />
@@ -138,6 +139,7 @@
     <ClCompile Include="src\setting.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="includes\addItems.h" />
     <ClInclude Include="includes\errorPrompt.h" />
     <ClInclude Include="includes\index.h" />
     <ClInclude Include="includes\interfaceBase.h" />
