@@ -9,12 +9,13 @@ class CAddItems : public CInterfaceBase
 private:
 	int line;
 	void show();
+	void moveCursor(int);
 public:
 	CAddItems();
-	virtual void up() {}
-	virtual void down() {}
+	virtual void up();
+	virtual void down();
 	virtual void left() {}
 	virtual void right() {}
-	virtual void enter(int &, int &) {}
+	virtual void enter(int &, int &);
 };
 #endif // !_ADD_ITEMS_H_
