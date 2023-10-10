@@ -9,8 +9,6 @@ class CPageJump : public CInterfaceBase
 	int line;
 	int type;
 	void show();
-	void showCursor();
-	void hideCursor();
 	void setTargetPage();
 	void moveCursor(int);
 public:

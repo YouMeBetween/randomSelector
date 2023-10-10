@@ -18,5 +18,7 @@ protected:
 	string getItem(string, string);
 	int setItem(string, string, string);
 	void nextInterfaceSet(int &, int &, int, int);
+	void showCursor();
+	void hideCursor();
 };
 #endif // !_INTERFACE_BASE_H_

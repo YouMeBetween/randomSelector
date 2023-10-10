@@ -78,3 +78,21 @@ void CInterfaceBase::nextInterfaceSet(int &next_interface, int &cursor_line, int
 	cursor_line = cursor_line_target;
 	return;
 }
+
+void CInterfaceBase::showCursor()
+{
+	HANDLE handle = GetStdHandle(STD_OUTPUT_HANDLE);
+	CONSOLE_CURSOR_INFO cursorInfo;
+	GetConsoleCursorInfo(handle, &cursorInfo);
+	cursorInfo.bVisible = true;
+	SetConsoleCursorInfo(handle, &cursorInfo);
+}
+
+void CInterfaceBase::hideCursor()
+{
+	HANDLE handle = GetStdHandle(STD_OUTPUT_HANDLE);
+	CONSOLE_CURSOR_INFO cursorInfo;
+	GetConsoleCursorInfo(handle, &cursorInfo);
+	cursorInfo.bVisible = false;
+	SetConsoleCursorInfo(handle, &cursorInfo);
+}

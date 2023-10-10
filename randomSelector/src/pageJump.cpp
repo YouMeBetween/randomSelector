@@ -32,24 +32,6 @@ void CPageJump::show()
 	cout << "********************************\n";
 }
 
-void CPageJump::showCursor()
-{
-	HANDLE handle = GetStdHandle(STD_OUTPUT_HANDLE);
-	CONSOLE_CURSOR_INFO cursorInfo;
-	GetConsoleCursorInfo(handle, &cursorInfo);
-	cursorInfo.bVisible = true;
-	SetConsoleCursorInfo(handle, &cursorInfo);
-}
-
-void CPageJump::hideCursor()
-{
-	HANDLE handle = GetStdHandle(STD_OUTPUT_HANDLE);
-	CONSOLE_CURSOR_INFO cursorInfo;
-	GetConsoleCursorInfo(handle, &cursorInfo);
-	cursorInfo.bVisible = false;
-	SetConsoleCursorInfo(handle, &cursorInfo);
-}
-
 void CPageJump::setTargetPage()
 {
 	int page = 0;
