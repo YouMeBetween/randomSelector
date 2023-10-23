@@ -25,5 +25,6 @@ public:
 	CItems();
 	vector<Item> getItems();
 	string chooseOne();
+	void addOne(Item);
 };
 #endif // !_ITEMS_H_

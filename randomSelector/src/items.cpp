@@ -144,3 +144,9 @@ string CItems::chooseOne()
 	}
 	return items.at(choice).name;
 }
+
+void CItems::addOne(Item item)
+{
+	items.push_back(item);
+	writeCsv();
+}

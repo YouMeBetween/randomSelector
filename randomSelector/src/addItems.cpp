@@ -4,6 +4,7 @@
 #include <cstdlib>
 #include "../includes/addItems.h"
 #include "../includes/index.h"
+#include "../includes/items.h"
 using namespace std;
 
 constexpr int FIRST_LINE = 3;
@@ -16,6 +17,7 @@ constexpr int LAST_LINE = 8;
 constexpr int QUIT_LINE = 8;
 constexpr int ARROW_OFFSET = 2;
 constexpr int INPUT_OFFSET = 16;
+constexpr int PROMPT_OFFSET = 12;
 
 void CAddItems::show()
 {
@@ -109,6 +111,25 @@ void CAddItems::setMaxWeight()
 	}
 }
 
+void CAddItems::confirm(int &next_interface, int &cursor_line)
+{
+	Item item;
+	CItems items;
+	if (name == "" || weight == 0) {
+		gotoxy(PROMPT_OFFSET, CONFIRM_LINE);
+		cout << "               ";
+		gotoxy(PROMPT_OFFSET, CONFIRM_LINE);
+		cout << "未输入名称或权重";
+		return;
+	}
+	item.name = name;
+	item.weight = weight;
+	item.min_weight = min_weight;
+	item.max_weight = max_weight;
+	items.addOne(item);
+	nextInterfaceSet(next_interface, cursor_line, ITEMS_SETUP_INDEX, NO_LINE);
+}
+
 CAddItems::CAddItems()
 {
 	line = FIRST_LINE;
@@ -141,6 +162,7 @@ void CAddItems::enter(int &next_interface, int &cursor_line)
 		case WEIGHT_LINE: setWeight(); break;
 		case MIN_WEIGHT_LINE: setMinWeight(); break;
 		case MAX_WEIGHT_LINE: setMaxWeight(); break;
+		case CONFIRM_LINE: confirm(next_interface, cursor_line); break;
 		default:
 		case QUIT_LINE: nextInterfaceSet(next_interface, cursor_line, ITEMS_SETUP_INDEX, NO_LINE); break;
 	}
