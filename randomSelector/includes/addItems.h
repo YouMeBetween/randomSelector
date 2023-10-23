@@ -8,8 +8,16 @@ class CAddItems : public CInterfaceBase
 {
 private:
 	int line;
+	string name;
+	int weight;
+	int min_weight;
+	int max_weight;
 	void show();
 	void moveCursor(int);
+	void setName();
+	void setWeight();
+	void setMinWeight();
+	void setMaxWeight();
 public:
 	CAddItems();
 	virtual void up();

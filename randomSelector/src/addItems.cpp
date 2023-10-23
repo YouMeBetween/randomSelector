@@ -1,13 +1,21 @@
 #include <iostream>
+#include <string>
+#include <algorithm>
 #include <cstdlib>
 #include "../includes/addItems.h"
 #include "../includes/index.h"
 using namespace std;
 
 constexpr int FIRST_LINE = 3;
+constexpr int NAME_LINE = 3;
+constexpr int WEIGHT_LINE = 4;
+constexpr int MIN_WEIGHT_LINE = 5;
+constexpr int MAX_WEIGHT_LINE = 6;
+constexpr int CONFIRM_LINE = 7;
 constexpr int LAST_LINE = 8;
 constexpr int QUIT_LINE = 8;
 constexpr int ARROW_OFFSET = 2;
+constexpr int INPUT_OFFSET = 16;
 
 void CAddItems::show()
 {
@@ -34,9 +42,80 @@ void CAddItems::moveCursor(int target)
 	return;
 }
 
+void CAddItems::setName()
+{
+	gotoxy(INPUT_OFFSET, NAME_LINE);
+	cout << "               ";
+	gotoxy(INPUT_OFFSET, NAME_LINE);
+	showCursor();
+	cin >> name;
+	hideCursor();
+}
+
+void CAddItems::setWeight()
+{
+	string input_str;
+	gotoxy(INPUT_OFFSET, WEIGHT_LINE);
+	cout << "               ";
+	gotoxy(INPUT_OFFSET, WEIGHT_LINE);
+	showCursor();
+	cin >> input_str;
+	hideCursor();
+	weight = max(atoi(input_str.c_str()), 0);
+	gotoxy(INPUT_OFFSET, WEIGHT_LINE);
+	cout << "               ";
+	if (weight != 0) {
+		gotoxy(INPUT_OFFSET, WEIGHT_LINE);
+		cout << weight;
+	}
+}
+
+void CAddItems::setMinWeight()
+{
+	string input_str;
+	gotoxy(INPUT_OFFSET, MIN_WEIGHT_LINE);
+	cout << "               ";
+	gotoxy(INPUT_OFFSET, MIN_WEIGHT_LINE);
+	showCursor();
+	cin >> input_str;
+	hideCursor();
+	min_weight = max(atoi(input_str.c_str()), 0);
+	if (max_weight != 0) {
+		min_weight = min(min_weight, max_weight);
+	}
+	gotoxy(INPUT_OFFSET, MIN_WEIGHT_LINE);
+	cout << "               ";
+	if (min_weight != 0) {
+		gotoxy(INPUT_OFFSET, MIN_WEIGHT_LINE);
+		cout << min_weight;
+	}
+}
+
+void CAddItems::setMaxWeight()
+{
+	string input_str;
+	gotoxy(INPUT_OFFSET, MAX_WEIGHT_LINE);
+	cout << "               ";
+	gotoxy(INPUT_OFFSET, MAX_WEIGHT_LINE);
+	showCursor();
+	cin >> input_str;
+	hideCursor();
+	max_weight = max(atoi(input_str.c_str()), min_weight);
+	gotoxy(INPUT_OFFSET, MAX_WEIGHT_LINE);
+	cout << "               ";
+	if (max_weight != 0) {
+		gotoxy(INPUT_OFFSET, MAX_WEIGHT_LINE);
+		cout << max_weight;
+	}
+}
+
 CAddItems::CAddItems()
 {
 	line = FIRST_LINE;
+	name = "";
+	weight = 0;
+	min_weight = 0;
+	max_weight = 0;
 	show();
 }
 
@@ -58,7 +137,11 @@ void CAddItems::enter(int &next_interface, int &cursor_line)
 {
 	switch (line)
 	{
+		case NAME_LINE: setName(); break;
+		case WEIGHT_LINE: setWeight(); break;
+		case MIN_WEIGHT_LINE: setMinWeight(); break;
+		case MAX_WEIGHT_LINE: setMaxWeight(); break;
 		default:
-		case QUIT_LINE: nextInterfaceSet(next_interface, cursor_line, ITEMS_SETUP_INDEX, NO_LINE);
+		case QUIT_LINE: nextInterfaceSet(next_interface, cursor_line, ITEMS_SETUP_INDEX, NO_LINE); break;
 	}
 }
