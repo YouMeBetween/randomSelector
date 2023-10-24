@@ -1,25 +1,13 @@
 #ifndef _ADD_ITEMS_H_
 #define _ADD_ITEMS_H_
-#include "interfaceBase.h"
+#include "editItemsBase.h"
 
 using namespace std;
 
-class CAddItems : public CInterfaceBase
+class CAddItems : public CEditItemsBase
 {
 private:
-	int line;
-	string name;
-	int weight;
-	int min_weight;
-	int max_weight;
 	void show();
-	void moveCursor(int);
-	void setName();
-	void setWeight();
-	void setMinWeight();
-	void setMaxWeight();
-	void confirm(int &, int &);
-	void weightRangeCheck();
 public:
 	CAddItems();
 	virtual void up();
