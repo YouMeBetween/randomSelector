@@ -64,12 +64,7 @@ void CAddItems::setWeight()
 	cin >> input_str;
 	hideCursor();
 	weight = max(atoi(input_str.c_str()), 0);
-	gotoxy(INPUT_OFFSET, WEIGHT_LINE);
-	cout << "               ";
-	if (weight != 0) {
-		gotoxy(INPUT_OFFSET, WEIGHT_LINE);
-		cout << weight;
-	}
+	weightRangeCheck();
 }
 
 void CAddItems::setMinWeight()
@@ -91,6 +86,7 @@ void CAddItems::setMinWeight()
 		gotoxy(INPUT_OFFSET, MIN_WEIGHT_LINE);
 		cout << min_weight;
 	}
+	weightRangeCheck();
 }
 
 void CAddItems::setMaxWeight()
@@ -109,6 +105,7 @@ void CAddItems::setMaxWeight()
 		gotoxy(INPUT_OFFSET, MAX_WEIGHT_LINE);
 		cout << max_weight;
 	}
+	weightRangeCheck();
 }
 
 void CAddItems::confirm(int &next_interface, int &cursor_line)
@@ -117,7 +114,7 @@ void CAddItems::confirm(int &next_interface, int &cursor_line)
 	CItems items;
 	if (name == "" || weight == 0) {
 		gotoxy(PROMPT_OFFSET, CONFIRM_LINE);
-		cout << "               ";
+		cout << "                   ";
 		gotoxy(PROMPT_OFFSET, CONFIRM_LINE);
 		cout << "未输入名称或权重";
 		return;
@@ -128,6 +125,23 @@ void CAddItems::confirm(int &next_interface, int &cursor_line)
 	item.max_weight = max_weight;
 	items.addOne(item);
 	nextInterfaceSet(next_interface, cursor_line, ITEMS_SETUP_INDEX, NO_LINE);
+}
+
+void CAddItems::weightRangeCheck()
+{
+	gotoxy(INPUT_OFFSET, WEIGHT_LINE);
+	cout << "               ";
+	if (weight == 0) {
+		return;
+	}
+	if (min_weight != 0) {
+		weight = max(weight, min_weight);
+	}
+	if (max_weight != 0) {
+		weight = min(weight, max_weight);
+	}
+	gotoxy(INPUT_OFFSET, WEIGHT_LINE);
+	cout << weight;
 }
 
 CAddItems::CAddItems()

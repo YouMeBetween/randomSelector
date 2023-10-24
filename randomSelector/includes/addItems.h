@@ -19,6 +19,7 @@ private:
 	void setMinWeight();
 	void setMaxWeight();
 	void confirm(int &, int &);
+	void weightRangeCheck();
 public:
 	CAddItems();
 	virtual void up();
