@@ -1,6 +1,9 @@
 #include <iostream>
+#include <vector>
+#include <string>
 #include <cstdlib>
 #include "../includes/editItems.h"
+#include "../includes/errorPrompt.h"
 #include "../includes/index.h"
 #include "../includes/items.h"
 using namespace std;
@@ -22,6 +25,29 @@ void CEditItems::show()
 	cout << "*   6.删除                     *\n";
 	cout << "*   7.取消                     *\n";
 	cout << "********************************\n";
+	CItems temp;
+	vector<Item> items = temp.getItems();
+	string item_want_edit = getItem("res/cfg.ini", "itemWantEdit");
+	if (item_want_edit == "异常") {
+		CErrorPrompt error_prompt("读取所选项信息失败");
+	}
+	for (auto iter = items.begin(); iter != items.end(); iter++) {
+		if (iter->name == item_want_edit) {
+			gotoxy(INPUT_OFFSET, NAME_LINE);
+			cout << iter->name;
+			gotoxy(INPUT_OFFSET, WEIGHT_LINE);
+			cout << iter->weight;
+			if (iter->min_weight != 0) {
+				gotoxy(INPUT_OFFSET, MIN_WEIGHT_LINE);
+				cout << iter->min_weight;
+			}
+			if (iter->max_weight != 0) {
+				gotoxy(INPUT_OFFSET, MAX_WEIGHT_LINE);
+				cout << iter->max_weight;
+			}
+			break;
+		}
+	}
 }
 
 CEditItems::CEditItems()
