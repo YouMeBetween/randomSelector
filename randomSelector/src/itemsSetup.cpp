@@ -211,6 +211,11 @@ void CItemsSetup::enter(int &next_interface, int &cursor_line)
 		} else if (column == THIS_BACK_COLUMN_INDEX) {
 			nextInterfaceSet(next_interface, cursor_line, MAIN_MENU_INDEX, ITEMS_SETUP_IN_MAIN_MENU);
 		}
+	} else if (line >= ITEMS_LINE && line <= ITEMS_LINE_LAST) {
+		if (setItem("res/cfg.ini", "itemWantEdit", items[page * ITEMS_PER_PAGE + line - ITEMS_LINE].name)) {
+			CErrorPrompt error_prompt("打开cfg.ini文件失败");
+		}
+		nextInterfaceSet(next_interface, cursor_line, EDIT_ITEMS_INDEX, NO_LINE);
 	} else if (line == PAGE_TURNING_LINE) {
 		if (column == THIS_PREV_COLUMN_INDEX && page > 0) {
 			displayItems(page - 1);
