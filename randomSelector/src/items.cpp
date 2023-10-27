@@ -147,6 +147,16 @@ string CItems::chooseOne()
 
 void CItems::addOne(Item item)
 {
-	items.push_back(item);
+	bool need_push_back = true;
+	for (auto iter = items.begin(); iter != items.end(); iter++) {
+		if (iter->name == item.name) {
+			*iter = item;
+			need_push_back = false;
+			break;
+		}
+	}
+	if (need_push_back) {
+		items.push_back(item);
+	}
 	writeCsv();
 }
