@@ -26,5 +26,6 @@ public:
 	vector<Item> getItems();
 	string chooseOne();
 	void addOne(Item);
+	void removeOne(string);
 };
 #endif // !_ITEMS_H_

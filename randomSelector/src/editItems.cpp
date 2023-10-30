@@ -9,6 +9,7 @@
 using namespace std;
 
 constexpr int LAST_LINE = 9;
+constexpr int REMOVE_LINE = 8;
 constexpr int QUIT_LINE = 9;
 
 void CEditItems::show()
@@ -54,6 +55,12 @@ void CEditItems::show()
 	}
 }
 
+void CEditItems::remove()
+{
+	CItems items;
+	items.removeOne(name);
+}
+
 CEditItems::CEditItems()
 {
 	line = FIRST_LINE;
@@ -87,6 +94,7 @@ void CEditItems::enter(int &next_interface, int &cursor_line)
 		case MIN_WEIGHT_LINE: setMinWeight(); break;
 		case MAX_WEIGHT_LINE: setMaxWeight(); break;
 		case CONFIRM_LINE: confirm(next_interface, cursor_line); break;
+		case REMOVE_LINE: remove();
 		default:
 		case QUIT_LINE: nextInterfaceSet(next_interface, cursor_line, ITEMS_SETUP_INDEX, NO_LINE); break;
 	}

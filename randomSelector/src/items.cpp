@@ -160,3 +160,14 @@ void CItems::addOne(Item item)
 	}
 	writeCsv();
 }
+
+void CItems::removeOne(string name)
+{
+	for (auto iter = items.begin(); iter != items.end(); iter++) {
+		if (iter->name == name) {
+			items.erase(iter);
+			break;
+		}
+	}
+	writeCsv();
+}

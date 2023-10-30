@@ -8,6 +8,7 @@ class CEditItems : public CEditItemsBase
 {
 private:
 	void show();
+	void remove();
 public:
 	CEditItems();
 	virtual void up();
