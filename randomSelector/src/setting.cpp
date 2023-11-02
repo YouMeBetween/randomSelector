@@ -11,22 +11,22 @@
 #include "../includes/errorPrompt.h"
 using namespace std;
 
-constexpr int FIRST_OPTION_LINE = 3;
+constexpr int FIRST_LINE = 3;
+constexpr int LAST_LINE = 5;
 constexpr int FINAL_LINE = 7;
-constexpr int MAX_INDEX = 2;
-constexpr int THIS_WEIGHT_SELECT_INDEX = 0;
-constexpr int THIS_DYNAMIC_WEIGHT_INDEX = 1;
-constexpr int THIS_BACK_INDEX = 2;
+constexpr int WEIGHT_SELECT_LINE = 3;
+constexpr int DYNAMIC_WEIGHT_LINE = 4;
+constexpr int BACK_LINE = 5;
 constexpr int ON_OFF_OFFSET = 21;
 constexpr int ARROW_OFFSET = 2;
 
 map<string, vector<int>> on_off_pos = {
-	{"weightSelect", {ON_OFF_OFFSET, FIRST_OPTION_LINE + THIS_WEIGHT_SELECT_INDEX}},
-	{"dynamicWeight", {ON_OFF_OFFSET, FIRST_OPTION_LINE + THIS_DYNAMIC_WEIGHT_INDEX}}
+	{"weightSelect", {ON_OFF_OFFSET, WEIGHT_SELECT_LINE}},
+	{"dynamicWeight", {ON_OFF_OFFSET, DYNAMIC_WEIGHT_LINE}}
 };
 map<int, string> line_to_name = {
-	{0, "weightSelect"},
-	{1, "dynamicWeight"}
+	{WEIGHT_SELECT_LINE, "weightSelect"},
+	{DYNAMIC_WEIGHT_LINE, "dynamicWeight"}
 };
 
 void CSetting::onOffShow(string index)
@@ -93,34 +93,34 @@ CSetting::CSetting()
 	line = 0;
 	getSetting();
 	show();
-	gotoxy(ARROW_OFFSET, FIRST_OPTION_LINE);
+	gotoxy(ARROW_OFFSET, FIRST_LINE);
 	cout << ">";
 	gotoxy(0, FINAL_LINE);
 }
 
 CSetting::CSetting(int x)
 {
-	line = max(min(x, MAX_INDEX), 0);
+	line = max(min(x, LAST_LINE), FIRST_LINE);
 	getSetting();
 	show();
-	gotoxy(ARROW_OFFSET, FIRST_OPTION_LINE + line);
+	gotoxy(ARROW_OFFSET, line);
 	cout << ">";
 	gotoxy(0, FINAL_LINE);
 }
 
 void CSetting::moveCursor(int target)
 {
-	gotoxy(ARROW_OFFSET, FIRST_OPTION_LINE + line);
+	gotoxy(ARROW_OFFSET, line);
 	cout << " ";
 	line = target;
-	gotoxy(ARROW_OFFSET, FIRST_OPTION_LINE + line);
+	gotoxy(ARROW_OFFSET, line);
 	cout << ">";
 	return;
 }
 
 void CSetting::up()
 {
-	if (line > 0) {
+	if (line > FIRST_LINE) {
 		moveCursor(line - 1);
 	}
 	return;
@@ -128,7 +128,7 @@ void CSetting::up()
 
 void CSetting::down()
 {
-	if (line < MAX_INDEX) {
+	if (line < LAST_LINE) {
 		moveCursor(line + 1);
 	}
 	return;
@@ -148,7 +148,7 @@ void CSetting::enter(int &next_interface, int &cursor_line)
 {
 	switch (line)
 	{
-		case THIS_BACK_INDEX: {
+		case BACK_LINE: {
 			nextInterfaceSet(next_interface, cursor_line, MAIN_MENU_INDEX, SETTING_LINE_IN_MAIN_MENU);
 			break;
 		}

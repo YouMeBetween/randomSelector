@@ -12,6 +12,6 @@ constexpr int NO_LINE = -1;
 constexpr int RESULT_SHOW_LINE_IN_MAIN_MENU = 0;
 constexpr int SETTING_LINE_IN_MAIN_MENU = 1;
 constexpr int ITEMS_SETUP_IN_MAIN_MENU = 2;
-constexpr int WEIGHT_SELECT_IN_SETTING = 0;
+constexpr int WEIGHT_SELECT_IN_SETTING = 3;
 
 #endif // !_INDEX_H_
