@@ -9,12 +9,12 @@
 #include "../includes/errorPrompt.h"
 using namespace std;
 
-constexpr int FIRST_OPTION_LINE = 3;
+constexpr int FIRST_LINE = 3;
+constexpr int LAST_LINE = 5;
 constexpr int FINAL_LINE = 7;
-constexpr int MAX_INDEX = 2;
-constexpr int THIS_RESULT_SHOW_INDEX = 0;
-constexpr int THIS_SETTING_INDEX = 1;
-constexpr int THIS_QUIT_INDEX = 2;
+constexpr int RESULT_SHOW_LINE = 3;
+constexpr int SETTING_LINE = 4;
+constexpr int QUIT_LINE = 5;
 constexpr int ARROW_OFFSET = 8;
 
 void CMainMenu::printMenu()
@@ -48,33 +48,33 @@ CMainMenu::CMainMenu()
 {
 	line = 0;
 	printMenu();
-	gotoxy(ARROW_OFFSET, FIRST_OPTION_LINE);
+	gotoxy(ARROW_OFFSET, FIRST_LINE);
 	cout << ">";
 	gotoxy(0, FINAL_LINE);
 }
 
 CMainMenu::CMainMenu(int x)
 {
-	line = max(min(x, MAX_INDEX), 0);
+	line = max(min(x, LAST_LINE), FIRST_LINE);
 	printMenu();
-	gotoxy(ARROW_OFFSET, FIRST_OPTION_LINE + line);
+	gotoxy(ARROW_OFFSET, line);
 	cout << ">";
 	gotoxy(0, FINAL_LINE);
 }
 
 void CMainMenu::moveCursor(int target)
 {
-	gotoxy(ARROW_OFFSET, FIRST_OPTION_LINE + line);
+	gotoxy(ARROW_OFFSET, line);
 	cout << " ";
 	line = target;
-	gotoxy(ARROW_OFFSET, FIRST_OPTION_LINE + line);
+	gotoxy(ARROW_OFFSET, line);
 	cout << ">";
 	return;
 }
 
 void CMainMenu::up()
 {
-	if (line > 0) {
+	if (line > FIRST_LINE) {
 		moveCursor(line - 1);
 	}
 	return;
@@ -82,7 +82,7 @@ void CMainMenu::up()
 
 void CMainMenu::down()
 {
-	if (line < MAX_INDEX) {
+	if (line < LAST_LINE) {
 		moveCursor(line + 1);
 	}
 	return;
@@ -92,16 +92,16 @@ void CMainMenu::enter(int &next_interface, int &cursor_line)
 {
 	switch (line)
 	{
-		case THIS_RESULT_SHOW_INDEX: {
+		case RESULT_SHOW_LINE: {
 			startChoose();
 			nextInterfaceSet(next_interface, cursor_line, RESULT_SHOW_INDEX, NO_LINE);
 			break;
 		}
-		case THIS_SETTING_INDEX: {
+		case SETTING_LINE: {
 			nextInterfaceSet(next_interface, cursor_line, SETTING_INDEX, WEIGHT_SELECT_IN_SETTING);
 			break;
 		}
-		case THIS_QUIT_INDEX: {
+		case QUIT_LINE: {
 			quit();
 			break;
 		}
