@@ -10,12 +10,11 @@
 using namespace std;
 
 constexpr int FIRST_OPTION_LINE = 3;
-constexpr int FINAL_LINE = 6;
-constexpr int MAX_INDEX = 3;
+constexpr int FINAL_LINE = 7;
+constexpr int MAX_INDEX = 2;
 constexpr int THIS_RESULT_SHOW_INDEX = 0;
 constexpr int THIS_SETTING_INDEX = 1;
-constexpr int THIS_ITEMS_SETUP_INDEX = 2;
-constexpr int THIS_QUIT_INDEX = 3;
+constexpr int THIS_QUIT_INDEX = 2;
 constexpr int ARROW_OFFSET = 8;
 
 void CMainMenu::printMenu()
@@ -26,8 +25,7 @@ void CMainMenu::printMenu()
 	cout << "********************************\n";
 	cout << "*         1.开始选择           *\n";
 	cout << "*         2.设置               *\n";
-	cout << "*         3.选项设置           *\n";
-	cout << "*         4.退出               *\n";
+	cout << "*         3.退出               *\n";
 	cout << "********************************\n";
 	return;
 }
@@ -101,10 +99,6 @@ void CMainMenu::enter(int &next_interface, int &cursor_line)
 		}
 		case THIS_SETTING_INDEX: {
 			nextInterfaceSet(next_interface, cursor_line, SETTING_INDEX, WEIGHT_SELECT_IN_SETTING);
-			break;
-		}
-		case THIS_ITEMS_SETUP_INDEX: {
-			nextInterfaceSet(next_interface, cursor_line, ITEMS_SETUP_INDEX, NO_LINE);
 			break;
 		}
 		case THIS_QUIT_INDEX: {

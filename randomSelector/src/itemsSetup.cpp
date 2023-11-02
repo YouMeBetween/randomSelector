@@ -209,7 +209,7 @@ void CItemsSetup::enter(int &next_interface, int &cursor_line)
 		} else if (column == THIS_ADD_ITEMS_INDEX) {
 			nextInterfaceSet(next_interface, cursor_line, ADD_ITEMS_INDEX, NO_LINE);
 		} else if (column == THIS_BACK_COLUMN_INDEX) {
-			nextInterfaceSet(next_interface, cursor_line, MAIN_MENU_INDEX, ITEMS_SETUP_IN_MAIN_MENU);
+			nextInterfaceSet(next_interface, cursor_line, SETTING_INDEX, ITEM_SETUP_IN_SETTING);
 		}
 	} else if (line >= ITEMS_LINE && line <= ITEMS_LINE_LAST) {
 		if (setItem("res/cfg.ini", "itemWantEdit", items[page * ITEMS_PER_PAGE + line - ITEMS_LINE].name)) {
