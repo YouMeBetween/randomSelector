@@ -136,12 +136,16 @@ void CSetting::down()
 
 void CSetting::left()
 {
-	onOffToggle(line_to_name[line]);
+	if (line_to_name.find(line) != line_to_name.end()) {
+		onOffToggle(line_to_name[line]);
+	}
 }
 
 void CSetting::right()
 {
-	onOffToggle(line_to_name[line]);
+	if (line_to_name.find(line) != line_to_name.end()) {
+		onOffToggle(line_to_name[line]);
+	}
 }
 
 void CSetting::enter(int &next_interface, int &cursor_line)
