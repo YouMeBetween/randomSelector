@@ -55,7 +55,7 @@ void CAddItems::enter(int &next_interface, int &cursor_line)
 		case WEIGHT_LINE: setWeight(); break;
 		case MIN_WEIGHT_LINE: setMinWeight(); break;
 		case MAX_WEIGHT_LINE: setMaxWeight(); break;
-		case CONFIRM_LINE: confirm(next_interface, cursor_line); break;
+		case CONFIRM_LINE: confirm(next_interface, cursor_line, true); break;
 		default:
 		case QUIT_LINE: nextInterfaceSet(next_interface, cursor_line, ITEMS_SETUP_INDEX, NO_LINE); break;
 	}

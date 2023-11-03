@@ -26,6 +26,7 @@ public:
 	vector<Item> getItems();
 	string chooseOne();
 	void addOne(Item);
+	void modifyOne(string, Item);
 	void removeOne(string);
 	int getIndex(string);
 };

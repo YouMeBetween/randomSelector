@@ -107,7 +107,7 @@ void CEditItemsBase::setMaxWeight()
 	weightRangeCheck();
 }
 
-void CEditItemsBase::confirm(int &next_interface, int &cursor_line)
+void CEditItemsBase::confirm(int &next_interface, int &cursor_line, bool is_add)
 {
 	int page;
 	Item item;
@@ -123,7 +123,12 @@ void CEditItemsBase::confirm(int &next_interface, int &cursor_line)
 	item.weight = weight;
 	item.min_weight = min_weight;
 	item.max_weight = max_weight;
-	items.addOne(item);
+	if (is_add) {
+		items.addOne(item);
+	} else {
+		string item_want_edit = getItem("res/cfg.ini", "itemWantEdit");
+		items.modifyOne(item_want_edit, item);
+	}
 	page = items.getIndex(name) / ITEMS_PER_PAGE_IN_ITEMS_SETUP;
 	if (setItem("res/cfg.ini", "page", to_string(page))) {
 		CErrorPrompt error_prompt("打开cfg.ini文件失败");

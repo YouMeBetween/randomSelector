@@ -36,6 +36,6 @@ protected:
 	void setWeight();
 	void setMinWeight();
 	void setMaxWeight();
-	void confirm(int &, int &);
+	void confirm(int &, int &, bool);
 };
 #endif // !_EDIT_ITEM_BASE_H_

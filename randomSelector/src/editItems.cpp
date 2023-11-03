@@ -93,7 +93,7 @@ void CEditItems::enter(int &next_interface, int &cursor_line)
 		case WEIGHT_LINE: setWeight(); break;
 		case MIN_WEIGHT_LINE: setMinWeight(); break;
 		case MAX_WEIGHT_LINE: setMaxWeight(); break;
-		case CONFIRM_LINE: confirm(next_interface, cursor_line); break;
+		case CONFIRM_LINE: confirm(next_interface, cursor_line, false); break;
 		case REMOVE_LINE: remove();
 		default:
 		case QUIT_LINE: {

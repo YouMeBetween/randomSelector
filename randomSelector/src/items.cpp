@@ -147,17 +147,17 @@ string CItems::chooseOne()
 
 void CItems::addOne(Item item)
 {
-	bool need_push_back = true;
-	for (auto iter = items.begin(); iter != items.end(); iter++) {
-		if (iter->name == item.name) {
-			*iter = item;
-			need_push_back = false;
-			break;
-		}
+	items.push_back(item);
+	writeCsv();
+}
+
+void CItems::modifyOne(string name, Item item)
+{
+	auto iter = find_if(items.begin(), items.end(), [name](Item item) { return item.name == name; });
+	if (iter == items.end()) {
+		return;
 	}
-	if (need_push_back) {
-		items.push_back(item);
-	}
+	*iter = item;
 	writeCsv();
 }
 
