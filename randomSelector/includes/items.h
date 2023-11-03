@@ -27,5 +27,6 @@ public:
 	string chooseOne();
 	void addOne(Item);
 	void removeOne(string);
+	int getIndex(string);
 };
 #endif // !_ITEMS_H_

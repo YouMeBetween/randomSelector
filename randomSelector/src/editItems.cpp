@@ -96,6 +96,13 @@ void CEditItems::enter(int &next_interface, int &cursor_line)
 		case CONFIRM_LINE: confirm(next_interface, cursor_line); break;
 		case REMOVE_LINE: remove();
 		default:
-		case QUIT_LINE: nextInterfaceSet(next_interface, cursor_line, ITEMS_SETUP_INDEX, NO_LINE); break;
+		case QUIT_LINE: {
+			CItems items;
+			if (setItem("res/cfg.ini", "page", to_string(items.getIndex(name) / ITEMS_PER_PAGE_IN_ITEMS_SETUP))) {
+				CErrorPrompt error_prompt("打开cfg.ini文件失败");
+			}
+			nextInterfaceSet(next_interface, cursor_line, ITEMS_SETUP_INDEX, NO_LINE);
+			break;
+		}
 	}
 }

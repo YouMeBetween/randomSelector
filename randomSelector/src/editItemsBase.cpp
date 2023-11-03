@@ -3,6 +3,7 @@
 #include <algorithm>
 #include <cstdlib>
 #include "../includes/editItemsBase.h"
+#include "../includes/errorPrompt.h"
 #include "../includes/index.h"
 #include "../includes/items.h"
 using namespace std;
@@ -108,6 +109,7 @@ void CEditItemsBase::setMaxWeight()
 
 void CEditItemsBase::confirm(int &next_interface, int &cursor_line)
 {
+	int page;
 	Item item;
 	CItems items;
 	if (name == "" || weight == 0) {
@@ -122,5 +124,9 @@ void CEditItemsBase::confirm(int &next_interface, int &cursor_line)
 	item.min_weight = min_weight;
 	item.max_weight = max_weight;
 	items.addOne(item);
+	page = items.getIndex(name) / ITEMS_PER_PAGE_IN_ITEMS_SETUP;
+	if (setItem("res/cfg.ini", "page", to_string(page))) {
+		CErrorPrompt error_prompt("打开cfg.ini文件失败");
+	}
 	nextInterfaceSet(next_interface, cursor_line, ITEMS_SETUP_INDEX, NO_LINE);
 }

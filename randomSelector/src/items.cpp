@@ -171,3 +171,13 @@ void CItems::removeOne(string name)
 	}
 	writeCsv();
 }
+
+int CItems::getIndex(string name)
+{
+	auto it = find_if(items.begin(), items.end(), [name](Item item) { return item.name == name; });
+	if (it == items.end()) {
+		return -1;
+	} else {
+		return distance(items.begin(), it);
+	}
+}
