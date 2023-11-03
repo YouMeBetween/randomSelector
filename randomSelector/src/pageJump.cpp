@@ -9,7 +9,6 @@
 #include "../includes/index.h"
 using namespace std;
 
-constexpr int ITEMS_PER_PAGE = 5;
 constexpr int INPUT_LINE = 2;
 constexpr int CONFIRM_LINE = 3;
 constexpr int INPUT_SEARCH_ARROW_OFFSET = 9;
@@ -55,12 +54,12 @@ void CPageJump::setTargetPage()
 	if (type == 0) {
 		for (auto iter = items.begin(); iter != items.end(); iter++) {
 			if (iter->name == input_str) {
-				page = (iter - items.begin()) / ITEMS_PER_PAGE;
+				page = (iter - items.begin()) / ITEMS_PER_PAGE_IN_ITEMS_SETUP;
 				break;
 			}
 		}
 	} else if (type == 1) {
-		page = max(min(stoi(input_str) - 1, items.size() / ITEMS_PER_PAGE), 0);
+		page = max(min(stoi(input_str) - 1, items.size() / ITEMS_PER_PAGE_IN_ITEMS_SETUP), 0);
 	}
 	if (setItem("res/cfg.ini", "page", to_string(page))) {
 		CErrorPrompt error_prompt("打开cfg.ini文件失败");

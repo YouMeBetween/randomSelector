@@ -8,7 +8,6 @@
 #include "../includes/items.h"
 using namespace std;
 
-constexpr int ITEMS_PER_PAGE = 5;
 constexpr int OPTION_LINE = 3;
 constexpr int ITEMS_LINE = 5;
 constexpr int ITEMS_LINE_LAST = 9;
@@ -42,7 +41,7 @@ void CItemsSetup::show()
 	cout << "****************************************\n";
 	cout << "*   > 搜索    跳转    新增    返回     *\n";
 	cout << "*       项目         权重   权重范围   *\n";
-	for (int i = 0; i != ITEMS_PER_PAGE; i++) {
+	for (int i = 0; i != ITEMS_PER_PAGE_IN_ITEMS_SETUP; i++) {
 		cout << "*                                      *\n";
 	}
 	cout << "*      上一页      ||      下一页      *\n";
@@ -51,29 +50,29 @@ void CItemsSetup::show()
 
 void CItemsSetup::displayItems(int target_page)
 {
-	if (target_page < 0 || target_page > (items.size() - 1) / ITEMS_PER_PAGE) {
+	if (target_page < 0 || target_page > (items.size() - 1) / ITEMS_PER_PAGE_IN_ITEMS_SETUP) {
 		return;
 	}
 	page = target_page;
 	gotoxy(0, ITEMS_LINE);
-	for (int i = 0; i != ITEMS_PER_PAGE; i++) {
+	for (int i = 0; i != ITEMS_PER_PAGE_IN_ITEMS_SETUP; i++) {
 		cout << "*                                      *\n";
 	}
-	for (int i = 0; i != ITEMS_PER_PAGE && static_cast<unsigned long long>(page) * ITEMS_PER_PAGE + i != items.size();
-		 i++) {
+	for (int i = 0; i != ITEMS_PER_PAGE_IN_ITEMS_SETUP
+		&& static_cast<unsigned long long>(page) * ITEMS_PER_PAGE_IN_ITEMS_SETUP + i != items.size(); i++) {
 		gotoxy(ITEMS_OFFSET, ITEMS_LINE + i);
-		cout << items.at(static_cast<unsigned long long>(page) * ITEMS_PER_PAGE + i).name;
+		cout << items.at(static_cast<unsigned long long>(page) * ITEMS_PER_PAGE_IN_ITEMS_SETUP + i).name;
 		gotoxy(WEIGHT_OFFSET, ITEMS_LINE + i);
-		cout << items.at(static_cast<unsigned long long>(page) * ITEMS_PER_PAGE + i).weight;
-		if (items.at(static_cast<unsigned long long>(page) * ITEMS_PER_PAGE + i).min_weight != 0) {
+		cout << items.at(static_cast<unsigned long long>(page) * ITEMS_PER_PAGE_IN_ITEMS_SETUP + i).weight;
+		if (items.at(static_cast<unsigned long long>(page) * ITEMS_PER_PAGE_IN_ITEMS_SETUP + i).min_weight != 0) {
 			gotoxy(MIN_WEIGHT_OFFSET, ITEMS_LINE + i);
-			cout << items.at(static_cast<unsigned long long>(page) * ITEMS_PER_PAGE + i).min_weight;
+			cout << items.at(static_cast<unsigned long long>(page) * ITEMS_PER_PAGE_IN_ITEMS_SETUP + i).min_weight;
 		}
 		gotoxy(WAVY_LINE_OFFSET, ITEMS_LINE + i);
 		cout << "~~";
-		if (items.at(static_cast<unsigned long long>(page) * ITEMS_PER_PAGE + i).max_weight != 0) {
+		if (items.at(static_cast<unsigned long long>(page) * ITEMS_PER_PAGE_IN_ITEMS_SETUP + i).max_weight != 0) {
 			gotoxy(MAX_WEIGHT_OFFSET, ITEMS_LINE + i);
-			cout << items.at(static_cast<unsigned long long>(page) * ITEMS_PER_PAGE + i).max_weight;
+			cout << items.at(static_cast<unsigned long long>(page) * ITEMS_PER_PAGE_IN_ITEMS_SETUP + i).max_weight;
 		}
 	}
 	gotoxy(CURRENT_PAGE_OFFSET, PAGE_TURNING_LINE);
@@ -83,7 +82,7 @@ void CItemsSetup::displayItems(int target_page)
 	gotoxy(TOTAL_PAGE_OFFSET, PAGE_TURNING_LINE);
 	cout << "  ";
 	gotoxy(TOTAL_PAGE_OFFSET, PAGE_TURNING_LINE);
-	cout << (items.size() - 1) / ITEMS_PER_PAGE + 1;
+	cout << (items.size() - 1) / ITEMS_PER_PAGE_IN_ITEMS_SETUP + 1;
 }
 
 void CItemsSetup::optionLineMoveCursor(int target_column)
@@ -153,10 +152,10 @@ void CItemsSetup::up()
 	if (line <= OPTION_LINE) {
 		return;
 	} else if (line == PAGE_TURNING_LINE) {
-		if (page != (items.size() - 1) / ITEMS_PER_PAGE) {
+		if (page != (items.size() - 1) / ITEMS_PER_PAGE_IN_ITEMS_SETUP) {
 			itemsLineMoveCursor(ITEMS_LINE_LAST);
 		} else {
-			itemsLineMoveCursor((items.size() - 1) % ITEMS_PER_PAGE + ITEMS_LINE);
+			itemsLineMoveCursor((items.size() - 1) % ITEMS_PER_PAGE_IN_ITEMS_SETUP + ITEMS_LINE);
 		}
 	} else if (line == ITEMS_LINE) {
 		optionLineMoveCursor(0);
@@ -171,8 +170,8 @@ void CItemsSetup::down()
 		return;
 	} else if (line == OPTION_LINE) {
 		itemsLineMoveCursor(ITEMS_LINE);
-	} else if (line == ITEMS_LINE_LAST ||
-				page == items.size() / ITEMS_PER_PAGE && line == (items.size() - 1) % ITEMS_PER_PAGE + ITEMS_LINE) {
+	} else if (line == ITEMS_LINE_LAST || page == items.size() / ITEMS_PER_PAGE_IN_ITEMS_SETUP
+		&& line == (items.size() - 1) % ITEMS_PER_PAGE_IN_ITEMS_SETUP + ITEMS_LINE) {
 		pageTurningMoveCursor(0, true);
 	} else {
 		itemsLineMoveCursor(line + 1);
@@ -212,14 +211,15 @@ void CItemsSetup::enter(int &next_interface, int &cursor_line)
 			nextInterfaceSet(next_interface, cursor_line, SETTING_INDEX, ITEM_SETUP_IN_SETTING);
 		}
 	} else if (line >= ITEMS_LINE && line <= ITEMS_LINE_LAST) {
-		if (setItem("res/cfg.ini", "itemWantEdit", items[page * ITEMS_PER_PAGE + line - ITEMS_LINE].name)) {
+		if (setItem("res/cfg.ini", "itemWantEdit", items[page * ITEMS_PER_PAGE_IN_ITEMS_SETUP + line
+			- ITEMS_LINE].name)) {
 			CErrorPrompt error_prompt("打开cfg.ini文件失败");
 		}
 		nextInterfaceSet(next_interface, cursor_line, EDIT_ITEMS_INDEX, NO_LINE);
 	} else if (line == PAGE_TURNING_LINE) {
 		if (column == THIS_PREV_COLUMN_INDEX && page > 0) {
 			displayItems(page - 1);
-		} else if (column == THIS_NEXT_COLUMN_INDEX && page < items.size() / ITEMS_PER_PAGE + 1) {
+		} else if (column == THIS_NEXT_COLUMN_INDEX && page < items.size() / ITEMS_PER_PAGE_IN_ITEMS_SETUP + 1) {
 			displayItems(page + 1);
 		}
 	}
