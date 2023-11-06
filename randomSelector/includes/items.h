@@ -10,6 +10,7 @@ typedef struct Item {
 	int weight{};
 	int min_weight{};
 	int max_weight{};
+	bool on_off{};
 	Item() {}
 };
 
@@ -17,7 +18,8 @@ class CItems
 {
 private:
 	vector<Item> items;
-	void adjustWeights(int);
+	vector<Item> items_to_select;
+	void adjustWeights(string);
 	void writeCsv();
 	string getItem(string, string);
 	bool getOnOffSetting(string);

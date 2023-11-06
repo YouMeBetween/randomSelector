@@ -35,19 +35,19 @@ void CEditItems::show()
 	for (auto iter = items.begin(); iter != items.end(); iter++) {
 		if (iter->name == item_want_edit) {
 			gotoxy(INPUT_OFFSET, NAME_LINE);
-			name = iter->name;
+			item.name = iter->name;
 			cout << iter->name;
 			gotoxy(INPUT_OFFSET, WEIGHT_LINE);
-			weight = iter->weight;
+			item.weight = iter->weight;
 			cout << iter->weight;
 			if (iter->min_weight != 0) {
 				gotoxy(INPUT_OFFSET, MIN_WEIGHT_LINE);
-				min_weight = iter->min_weight;
+				item.min_weight = iter->min_weight;
 				cout << iter->min_weight;
 			}
 			if (iter->max_weight != 0) {
 				gotoxy(INPUT_OFFSET, MAX_WEIGHT_LINE);
-				max_weight = iter->max_weight;
+				item.max_weight = iter->max_weight;
 				cout << iter->max_weight;
 			}
 			break;
@@ -58,16 +58,16 @@ void CEditItems::show()
 void CEditItems::remove()
 {
 	CItems items;
-	items.removeOne(name);
+	items.removeOne(item.name);
 }
 
 CEditItems::CEditItems()
 {
 	line = FIRST_LINE;
-	name = "";
-	weight = 0;
-	min_weight = 0;
-	max_weight = 0;
+	item.name = "";
+	item.weight = 0;
+	item.min_weight = 0;
+	item.max_weight = 0;
 	show();
 }
 
@@ -98,7 +98,7 @@ void CEditItems::enter(int &next_interface, int &cursor_line)
 		default:
 		case QUIT_LINE: {
 			CItems items;
-			if (setItem("res/cfg.ini", "page", to_string(items.getIndex(name) / ITEMS_PER_PAGE_IN_ITEMS_SETUP))) {
+			if (setItem("res/cfg.ini", "page", to_string(items.getIndex(item.name) / ITEMS_PER_PAGE_IN_ITEMS_SETUP))) {
 				CErrorPrompt error_prompt("打开cfg.ini文件失败");
 			}
 			nextInterfaceSet(next_interface, cursor_line, ITEMS_SETUP_INDEX, NO_LINE);

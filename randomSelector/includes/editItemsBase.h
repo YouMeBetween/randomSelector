@@ -2,6 +2,7 @@
 #define _EDIT_ITEMS_BASE_H_
 #include <string>
 #include "interfaceBase.h"
+#include "items.h"
 
 using namespace std;
 
@@ -26,10 +27,7 @@ public:
 	virtual void enter(int &, int &) {}
 protected:
 	int line;
-	string name;
-	int weight;
-	int min_weight;
-	int max_weight;
+	Item item;
 	void moveCursor(int);
 	void setName();
 	void weightRangeCheck();

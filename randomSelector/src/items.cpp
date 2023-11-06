@@ -12,8 +12,10 @@ using namespace std;
 
 constexpr int MIN_WEIGHT = 1;
 
-void CItems::adjustWeights(int choice)
+void CItems::adjustWeights(string choice_name)
 {
+	auto iter = find_if(items.begin(), items.end(), [choice_name](Item item) { return item.name == choice_name; });
+	int choice = distance(items.begin(), iter);
 	if (items.at(choice).min_weight == 0 || items.at(choice).min_weight <= items.at(choice).weight / 2) {
 		items.at(choice).weight /= 2;
 	}
@@ -29,9 +31,9 @@ void CItems::adjustWeights(int choice)
 void CItems::writeCsv()
 {
 	ofstream csv_data("res/cfg.csv", ios::out);
-	csv_data << "项目,权重,最低权重,最高权重\n";
+	csv_data << "项目,权重,最低权重,最高权重,开关\n";
 	for (auto iter = items.begin(); iter != items.end(); iter++) {
-		csv_data << iter->name << "," << iter->weight << "," << iter->min_weight << "," << iter->max_weight << endl;
+		csv_data << iter->name << "," << iter->weight << "," << iter->min_weight << "," << iter->max_weight << "," << iter->on_off << endl;
 	}
 	csv_data.close();
 }
@@ -91,7 +93,11 @@ CItems::CItems()
 		temp.weight = stoi(words[1]);
 		temp.min_weight = stoi(words[2]);
 		temp.max_weight = stoi(words[3]);
+		temp.on_off = static_cast<bool>(stoi(words[4]));
 		items.push_back(temp);
+		if (temp.on_off) {
+			items_to_select.push_back(temp);
+		}
 	}
 	csv_data.close();
 }
@@ -110,21 +116,21 @@ string CItems::chooseOne()
 	vector<double> weight;
 	default_random_engine e;
 	uniform_real_distribution<double> u(0, 1);
-	if (items.empty()) {
+	if (items_to_select.empty()) {
 		CErrorPrompt error_prompt("没有待选项");
 	}
 	weight.push_back(0.0);
 	if (is_weight_select) {
 		double total_weight = 0.0;
-		for (auto iter = items.begin(); iter != items.end(); iter++) {
+		for (auto iter = items_to_select.begin(); iter != items_to_select.end(); iter++) {
 			total_weight += iter->weight;
 		}
-		for (auto iter = items.begin(); iter != items.end(); iter++) {
+		for (auto iter = items_to_select.begin(); iter != items_to_select.end(); iter++) {
 			weight.push_back(iter->weight / total_weight + weight.back());
 		}
 	} else {
-		for (size_t i = 0; i != items.size(); i++) {
-			weight.push_back(1.0 / items.size() + weight.back());
+		for (size_t i = 0; i != items_to_select.size(); i++) {
+			weight.push_back(1.0 / items_to_select.size() + weight.back());
 		}
 	}
 	weight.erase(weight.begin());
@@ -139,10 +145,10 @@ string CItems::chooseOne()
 		}
 	}
 	if (is_weight_select && is_dynamic_weight) {
-		adjustWeights(choice);
+		adjustWeights(items_to_select.at(choice).name);
 		writeCsv();
 	}
-	return items.at(choice).name;
+	return items_to_select.at(choice).name;
 }
 
 void CItems::addOne(Item item)

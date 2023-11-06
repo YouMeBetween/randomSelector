@@ -26,10 +26,10 @@ void CAddItems::show()
 CAddItems::CAddItems()
 {
 	line = FIRST_LINE;
-	name = "";
-	weight = 0;
-	min_weight = 0;
-	max_weight = 0;
+	item.name = "";
+	item.weight = 0;
+	item.min_weight = 0;
+	item.max_weight = 0;
 	show();
 }
 
