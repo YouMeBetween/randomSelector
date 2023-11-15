@@ -30,6 +30,7 @@ public:
 	void addOne(Item);
 	void modifyOne(string, Item);
 	void removeOne(string);
+	void switchOne(string);
 	int getIndex(string);
 };
 #endif // !_ITEMS_H_

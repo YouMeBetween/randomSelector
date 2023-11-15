@@ -45,7 +45,7 @@ void CSetting::show()
 	cout << "********************************\n";
 	cout << "*   1.根据权重选择  <  >       *\n";
 	cout << "*   2.动态权重      <  >       *\n";
-	cout << "*   3.选项权重设置             *\n";
+	cout << "*   3.选项设置                 *\n";
 	cout << "*   4.返回                     *\n";
 	cout << "********************************\n";
 	for (auto iter = on_off_pos.begin(); iter != on_off_pos.end(); iter++) {

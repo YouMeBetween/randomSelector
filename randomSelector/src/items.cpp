@@ -178,6 +178,17 @@ void CItems::removeOne(string name)
 	writeCsv();
 }
 
+void CItems::switchOne(string name)
+{
+	auto it = find_if(items.begin(), items.end(), [name](Item item) { return item.name == name; });
+	if (it == items.end()) {
+		return;
+	} else {
+		it->on_off = !it->on_off;
+		writeCsv();
+	}
+}
+
 int CItems::getIndex(string name)
 {
 	auto it = find_if(items.begin(), items.end(), [name](Item item) { return item.name == name; });
