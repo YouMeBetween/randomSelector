@@ -33,7 +33,8 @@ void CItems::writeCsv()
 	ofstream csv_data("res/cfg.csv", ios::out);
 	csv_data << "项目,权重,最低权重,最高权重,开关\n";
 	for (auto iter = items.begin(); iter != items.end(); iter++) {
-		csv_data << iter->name << "," << iter->weight << "," << iter->min_weight << "," << iter->max_weight << "," << iter->on_off << endl;
+		csv_data << iter->name << "," << iter->weight << "," << iter->min_weight << "," << iter->max_weight << ","
+				 << iter->on_off << endl;
 	}
 	csv_data.close();
 }
