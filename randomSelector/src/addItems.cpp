@@ -33,13 +33,6 @@ CAddItems::CAddItems()
 	show();
 }
 
-void CAddItems::up()
-{
-	if (line > FIRST_LINE) {
-		moveCursor(line - 1);
-	}
-}
-
 void CAddItems::down()
 {
 	if (line < LAST_LINE) {

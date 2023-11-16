@@ -11,7 +11,6 @@ private:
 	void remove();
 public:
 	CEditItems();
-	virtual void up();
 	virtual void down();
 	virtual void left() {}
 	virtual void right() {}

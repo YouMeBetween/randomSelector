@@ -10,7 +10,6 @@ private:
 	void show();
 public:
 	CAddItems();
-	virtual void up();
 	virtual void down();
 	virtual void left() {}
 	virtual void right() {}

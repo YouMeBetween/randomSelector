@@ -20,7 +20,7 @@ class CEditItemsBase : public CInterfaceBase
 {
 public:
 	CEditItemsBase();
-	virtual void up() {}
+	virtual void up();
 	virtual void down() {}
 	virtual void left() {}
 	virtual void right() {}

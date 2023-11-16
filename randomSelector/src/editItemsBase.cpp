@@ -13,6 +13,13 @@ CEditItemsBase::CEditItemsBase()
 	line = FIRST_LINE;
 }
 
+void CEditItemsBase::up()
+{
+	if (line > FIRST_LINE) {
+		moveCursor(line - 1);
+	}
+}
+
 void CEditItemsBase::moveCursor(int target)
 {
 	gotoxy(ARROW_OFFSET, line);

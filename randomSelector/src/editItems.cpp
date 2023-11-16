@@ -71,13 +71,6 @@ CEditItems::CEditItems()
 	show();
 }
 
-void CEditItems::up()
-{
-	if (line > FIRST_LINE) {
-		moveCursor(line - 1);
-	}
-}
-
 void CEditItems::down()
 {
 	if (line < LAST_LINE) {
