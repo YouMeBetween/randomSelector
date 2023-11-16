@@ -135,7 +135,6 @@ void CItemsSetup::pageTurningMoveCursor(int target_column, bool is_from_items)
 
 CItemsSetup::CItemsSetup()
 {
-	CItems temp;
 	string target_page = getItem("res/cfg.ini", "page");
 	if (target_page == "异常"){
 		CErrorPrompt error_prompt("候选项列表获取失败");
@@ -146,7 +145,6 @@ CItemsSetup::CItemsSetup()
 	if (setItem("res/cfg.ini", "page", "0")) {
 		CErrorPrompt error_prompt("打开cfg.ini文件失败");
 	}
-	items = temp.getItems();
 	show();
 	displayItems(page);
 }
@@ -191,9 +189,7 @@ void CItemsSetup::left()
 			pageTurningMoveCursor(column - 1, false);
 		}
 	} else if (line >= ITEMS_LINE && line <= ITEMS_LINE_LAST) {
-		CItems temp;
-		temp.switchOne(items[ITEMS_PER_PAGE_IN_ITEMS_SETUP * page + line - ITEMS_LINE].name);
-		items = temp.getItems();
+		items.switchOne(items.at(ITEMS_PER_PAGE_IN_ITEMS_SETUP * page + line - ITEMS_LINE).name);
 		displayItems(page);
 		gotoxy(ITEMS_ARROW_OFFSET, line);
 		cout << ">";
@@ -207,9 +203,7 @@ void CItemsSetup::right()
 	} else if (line == PAGE_TURNING_LINE && column < PAGE_TURNING_LINE_MAX_COLUMN) {
 		pageTurningMoveCursor(column + 1, false);
 	} else if (line >= ITEMS_LINE && line <= ITEMS_LINE_LAST) {
-		CItems temp;
-		temp.switchOne(items[ITEMS_PER_PAGE_IN_ITEMS_SETUP * page + line - ITEMS_LINE].name);
-		items = temp.getItems();
+		items.switchOne(items.at(ITEMS_PER_PAGE_IN_ITEMS_SETUP * page + line - ITEMS_LINE).name);
 		displayItems(page);
 		gotoxy(ITEMS_ARROW_OFFSET, line);
 		cout << ">";
@@ -229,8 +223,8 @@ void CItemsSetup::enter(int &next_interface, int &cursor_line)
 			nextInterfaceSet(next_interface, cursor_line, SETTING_INDEX, ITEM_SETUP_IN_SETTING);
 		}
 	} else if (line >= ITEMS_LINE && line <= ITEMS_LINE_LAST) {
-		if (setItem("res/cfg.ini", "itemWantEdit", items[page * ITEMS_PER_PAGE_IN_ITEMS_SETUP + line
-			- ITEMS_LINE].name)) {
+		if (setItem("res/cfg.ini", "itemWantEdit",
+					items.at(page * ITEMS_PER_PAGE_IN_ITEMS_SETUP + line - ITEMS_LINE).name)) {
 			CErrorPrompt error_prompt("打开cfg.ini文件失败");
 		}
 		nextInterfaceSet(next_interface, cursor_line, EDIT_ITEMS_INDEX, NO_LINE);

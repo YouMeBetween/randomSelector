@@ -12,7 +12,7 @@ private:
 	int line;
 	int column;
 	int page;
-	vector<Item> items;
+	CItems items;
 	void show();
 	void displayItems(int);
 	void optionLineMoveCursor(int);
