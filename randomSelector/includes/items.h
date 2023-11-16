@@ -32,5 +32,7 @@ public:
 	void removeOne(string);
 	void switchOne(string);
 	int getIndex(string);
+	int size();
+	Item at(int);
 };
 #endif // !_ITEMS_H_

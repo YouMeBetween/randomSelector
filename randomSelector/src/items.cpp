@@ -199,3 +199,13 @@ int CItems::getIndex(string name)
 		return distance(items.begin(), it);
 	}
 }
+
+int CItems::size()
+{
+	return items.size();
+}
+
+Item CItems::at(int index)
+{
+	return items.at(index);
+}
