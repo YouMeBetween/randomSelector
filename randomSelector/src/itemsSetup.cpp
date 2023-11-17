@@ -59,25 +59,24 @@ void CItemsSetup::displayItems(int target_page)
 	for (int i = 0; i != ITEMS_PER_PAGE_IN_ITEMS_SETUP; i++) {
 		cout << "*                                            *\n";
 	}
-	for (int i = 0; i != ITEMS_PER_PAGE_IN_ITEMS_SETUP
-		&& static_cast<unsigned long long>(page) * ITEMS_PER_PAGE_IN_ITEMS_SETUP + i != items.size(); i++) {
+	for (int i = 0; i != ITEMS_PER_PAGE_IN_ITEMS_SETUP && page * ITEMS_PER_PAGE_IN_ITEMS_SETUP + i != items.size();
+		 i++) {
 		gotoxy(ITEMS_OFFSET, ITEMS_LINE + i);
-		cout << items.at(static_cast<unsigned long long>(page) * ITEMS_PER_PAGE_IN_ITEMS_SETUP + i).name;
+		cout << items.at(page * ITEMS_PER_PAGE_IN_ITEMS_SETUP + i).name;
 		gotoxy(WEIGHT_OFFSET, ITEMS_LINE + i);
-		cout << items.at(static_cast<unsigned long long>(page) * ITEMS_PER_PAGE_IN_ITEMS_SETUP + i).weight;
-		if (items.at(static_cast<unsigned long long>(page) * ITEMS_PER_PAGE_IN_ITEMS_SETUP + i).min_weight != 0) {
+		cout << items.at(page * ITEMS_PER_PAGE_IN_ITEMS_SETUP + i).weight;
+		if (items.at(page * ITEMS_PER_PAGE_IN_ITEMS_SETUP + i).min_weight != 0) {
 			gotoxy(MIN_WEIGHT_OFFSET, ITEMS_LINE + i);
-			cout << items.at(static_cast<unsigned long long>(page) * ITEMS_PER_PAGE_IN_ITEMS_SETUP + i).min_weight;
+			cout << items.at(page * ITEMS_PER_PAGE_IN_ITEMS_SETUP + i).min_weight;
 		}
 		gotoxy(WAVY_LINE_OFFSET, ITEMS_LINE + i);
 		cout << "~~";
-		if (items.at(static_cast<unsigned long long>(page) * ITEMS_PER_PAGE_IN_ITEMS_SETUP + i).max_weight != 0) {
+		if (items.at(page * ITEMS_PER_PAGE_IN_ITEMS_SETUP + i).max_weight != 0) {
 			gotoxy(MAX_WEIGHT_OFFSET, ITEMS_LINE + i);
-			cout << items.at(static_cast<unsigned long long>(page) * ITEMS_PER_PAGE_IN_ITEMS_SETUP + i).max_weight;
+			cout << items.at(page * ITEMS_PER_PAGE_IN_ITEMS_SETUP + i).max_weight;
 		}
 		gotoxy(SWITCH_OFFSET - 1, ITEMS_LINE + i);
-		cout << "<" << (items.at(static_cast<unsigned long long>(page) * ITEMS_PER_PAGE_IN_ITEMS_SETUP + i).on_off
-			? "开" : "关") << ">";
+		cout << "<" << (items.at(page * ITEMS_PER_PAGE_IN_ITEMS_SETUP + i).on_off ? "开" : "关") << ">";
 	}
 	gotoxy(CURRENT_PAGE_OFFSET, PAGE_TURNING_LINE);
 	cout << "  ";
