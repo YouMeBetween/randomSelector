@@ -45,6 +45,15 @@
     <ClCompile Include="src\addItems.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="src\editItems.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\editItemsBase.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\itemsListSetting.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="includes\items.h">
@@ -75,6 +84,15 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="includes\addItems.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\editItems.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\editItemsBase.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\itemsListSetting.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

@@ -9,6 +9,7 @@
 #include "includes/pageJump.h"
 #include "includes/addItems.h"
 #include "includes/editItems.h"
+#include "includes/itemsListSetting.h"
 #include "includes/index.h"
 using namespace std;
 
@@ -92,6 +93,11 @@ void switchInterface(shared_ptr<CInterfaceBase> &interface_base, int &next_inter
 		case EDIT_ITEMS_INDEX: {
 			shared_ptr<CEditItems> edit_items = make_shared<CEditItems>();
 			interface_base = edit_items;
+			break;
+		}
+		case ITEMS_LIST_SETTING_INDEX: {
+			shared_ptr<CItemsListSetting> items_list_setting = make_shared<CItemsListSetting>();
+			interface_base = items_list_setting;
 			break;
 		}
 	}

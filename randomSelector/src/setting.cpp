@@ -12,12 +12,13 @@
 using namespace std;
 
 constexpr int FIRST_LINE = 3;
-constexpr int LAST_LINE = 6;
+constexpr int LAST_LINE = 7;
 constexpr int FINAL_LINE = 8;
 constexpr int WEIGHT_SELECT_LINE = 3;
 constexpr int DYNAMIC_WEIGHT_LINE = 4;
-constexpr int ITEM_SETUP_LINE = 5;
-constexpr int BACK_LINE = 6;
+constexpr int ITEMS_LIST_SETTING = 5;
+constexpr int ITEMS_SETUP_LINE = 6;
+constexpr int BACK_LINE = 7;
 constexpr int ON_OFF_OFFSET = 21;
 constexpr int ARROW_OFFSET = 2;
 
@@ -45,8 +46,9 @@ void CSetting::show()
 	cout << "********************************\n";
 	cout << "*   1.根据权重选择  <  >       *\n";
 	cout << "*   2.动态权重      <  >       *\n";
-	cout << "*   3.选项设置                 *\n";
-	cout << "*   4.返回                     *\n";
+	cout << "*   3.选项列表设置             *\n";
+	cout << "*   4.选项设置                 *\n";
+	cout << "*   5.返回                     *\n";
 	cout << "********************************\n";
 	for (auto iter = on_off_pos.begin(); iter != on_off_pos.end(); iter++) {
 		onOffShow(iter->first);
@@ -154,8 +156,12 @@ void CSetting::enter(int &next_interface, int &cursor_line)
 {
 	switch (line)
 	{
-		case ITEM_SETUP_LINE: {
+		case ITEMS_SETUP_LINE: {
 			nextInterfaceSet(next_interface, cursor_line, ITEMS_SETUP_INDEX, NO_LINE);
+			break;
+		}
+		case ITEMS_LIST_SETTING: {
+			nextInterfaceSet(next_interface, cursor_line, ITEMS_LIST_SETTING_INDEX, NO_LINE);
 			break;
 		}
 		case BACK_LINE: {

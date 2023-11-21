@@ -134,6 +134,7 @@
     <ClCompile Include="src\errorPrompt.cpp" />
     <ClCompile Include="src\interfaceBase.cpp" />
     <ClCompile Include="src\items.cpp" />
+    <ClCompile Include="src\itemsListSetting.cpp" />
     <ClCompile Include="src\itemsSetup.cpp" />
     <ClCompile Include="src\mainMenu.cpp" />
     <ClCompile Include="src\pageJump.cpp" />
@@ -148,6 +149,7 @@
     <ClInclude Include="includes\index.h" />
     <ClInclude Include="includes\interfaceBase.h" />
     <ClInclude Include="includes\items.h" />
+    <ClInclude Include="includes\itemsListSetting.h" />
     <ClInclude Include="includes\itemsSetup.h" />
     <ClInclude Include="includes\mainMenu.h" />
     <ClInclude Include="includes\pageJump.h" />
