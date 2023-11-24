@@ -1,5 +1,6 @@
 #ifndef _PAGE_JUMP_H_
 #define _PAGE_JUMP_H_
+#include <string>
 #include "interfaceBase.h"
 
 using namespace std;
@@ -9,7 +10,10 @@ class CPageJump : public CInterfaceBase
 	int line;
 	int type;
 	void show();
-	void setTargetPage();
+	string getInput();
+	void writePage(int);
+	void setItemsSetupPage();
+	void setItemsListSettingPage();
 	void moveCursor(int);
 public:
 	CPageJump(int);

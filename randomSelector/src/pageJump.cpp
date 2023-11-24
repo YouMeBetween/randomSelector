@@ -34,45 +34,65 @@ void CPageJump::show()
 	cout << "********************************\n";
 }
 
-void CPageJump::setTargetPage()
+string CPageJump::getInput()
 {
-	int page = 0;
 	string input_str;
-	CItems temp;
-	vector<Item> items = temp.getItems();
-	if ((type & SEARCH_OR_JUMP) == 0) {
+	if (!(type & SEARCH_OR_JUMP)) {
 		gotoxy(INPUT_SEARCH_ARROW_OFFSET, INPUT_LINE);
-	} else {
-		gotoxy(INPUT_JUMP_ARROW_OFFSET, INPUT_LINE);
-	}
-	cout << " ";
-	if ((type & SEARCH_OR_JUMP) == 0) {
+		cout << " ";
 		gotoxy(INPUT_SEARCH_OFFSET, INPUT_LINE);
 	} else {
+		gotoxy(INPUT_JUMP_ARROW_OFFSET, INPUT_LINE);
+		cout << " ";
 		gotoxy(INPUT_JUMP_OFFSET, INPUT_LINE);
 	}
 	showCursor();
 	cin >> input_str;
 	hideCursor();
-	if ((type & SEARCH_OR_JUMP) == 0) {
-		for (auto iter = items.begin(); iter != items.end(); iter++) {
-			if (iter->name == input_str) {
-				page = (iter - items.begin()) / ITEMS_PER_PAGE_IN_ITEMS_SETUP;
-				break;
-			}
-		}
-	} else if ((type & SEARCH_OR_JUMP) == 1) {
-		page = max(min(stoi(input_str) - 1, items.size() / ITEMS_PER_PAGE_IN_ITEMS_SETUP), 0);
-	}
+	return input_str;
+}
+
+void CPageJump::writePage(int page)
+{
 	if (setItem("res/cfg.ini", "page", to_string(page))) {
 		CErrorPrompt error_prompt("打开cfg.ini文件失败");
 	}
-	if ((type & SEARCH_OR_JUMP) == 0) {
+	if (!(type & SEARCH_OR_JUMP)) {
 		gotoxy(INPUT_SEARCH_ARROW_OFFSET, INPUT_LINE);
 	} else {
 		gotoxy(INPUT_JUMP_ARROW_OFFSET, INPUT_LINE);
 	}
 	cout << ">";
+}
+
+void CPageJump::setItemsSetupPage()
+{
+	int page = 0;
+	CItems temp;
+	vector<Item> items = temp.getItems();
+	string input_str = getInput();
+	if (!(type & SEARCH_OR_JUMP)) {
+		auto iter = find_if(items.begin(), items.end(), [input_str](Item item) { return item.name == input_str; });
+		page = distance(items.begin(), iter) / ITEMS_PER_PAGE_IN_ITEMS_SETUP;
+	} else if (type & SEARCH_OR_JUMP) {
+		page = max(min(stoi(input_str) - 1, items.size() / ITEMS_PER_PAGE_IN_ITEMS_SETUP), 0);
+	}
+	writePage(page);
+}
+
+void CPageJump::setItemsListSettingPage()
+{
+	int page = 0;
+	vector<string> files;
+	get_need_file("res", files, ".csv");
+	string input_str = getInput();
+	if (!(type & SEARCH_OR_JUMP)) {
+		auto iter = find(files.begin(), files.end(), input_str);
+		page = distance(files.begin(), iter) / LIST_PER_PAGE_IN_ITEMS_LIST_SETTING;
+	} else if (type & SEARCH_OR_JUMP) {
+		page = max(min(stoi(input_str) - 1, files.size() / LIST_PER_PAGE_IN_ITEMS_LIST_SETTING), 0);
+	}
+	writePage(page);
 }
 
 void CPageJump::moveCursor(int target_line)
@@ -103,7 +123,11 @@ CPageJump::CPageJump(int input_type)
 	line = INPUT_LINE;
 	type = input_type;
 	show();
-	setTargetPage();
+	if (type & IS_FROM_ITEMS_SETUP) {
+		setItemsSetupPage();
+	} else if (type & IS_FROM_ITEMS_LIST_SETTING) {
+		setItemsListSettingPage();
+	}
 }
 
 void CPageJump::up()
@@ -123,8 +147,16 @@ void CPageJump::down()
 void CPageJump::enter(int &next_interface, int &cursor_line)
 {
 	if (line == INPUT_LINE) {
-		setTargetPage();
+		if (type & IS_FROM_ITEMS_SETUP) {
+			setItemsSetupPage();
+		} else if (type & IS_FROM_ITEMS_LIST_SETTING) {
+			setItemsListSettingPage();
+		}
 	} else {
-		nextInterfaceSet(next_interface, cursor_line, ITEMS_SETUP_INDEX, NO_LINE);
+		if (type & IS_FROM_ITEMS_SETUP) {
+			nextInterfaceSet(next_interface, cursor_line, ITEMS_SETUP_INDEX, NO_LINE);
+		} else if (type & IS_FROM_ITEMS_LIST_SETTING) {
+			nextInterfaceSet(next_interface, cursor_line, ITEMS_LIST_SETTING_INDEX, NO_LINE);
+		}
 	}
 }

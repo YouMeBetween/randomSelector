@@ -4,6 +4,7 @@
 #include <string>
 #include <cstdlib>
 #include "../includes/itemsListSetting.h"
+#include "../includes/errorPrompt.h"
 #include "../includes/index.h"
 using namespace std;
 
@@ -114,12 +115,19 @@ void CItemsListSetting::pageTurningMoveCursor(int target_column, int is_from_ite
 
 CItemsListSetting::CItemsListSetting()
 {
+	string target_page = getItem("res/cfg.ini", "page");
+	if (target_page == "异常") {
+		CErrorPrompt error_prompt("候选项列表获取失败");
+	}
 	line = OPTION_LINE;
 	column = 0;
-	page = 0;
+	page = stoi(target_page);
 	get_need_file("res", list_name, ".csv");
+	if (setItem("res/cfg.ini", "page", "0")) {
+		CErrorPrompt error_prompt("打开cfg.ini文件失败");
+	}
 	show();
-	displayLists(0);
+	displayLists(page);
 }
 
 void CItemsListSetting::up()
@@ -177,9 +185,9 @@ void CItemsListSetting::enter(int &next_interface, int &cursor_line)
 {
 	if (line == OPTION_LINE) {
 		if (column == THIS_SEARCH_COLUMN_INDEX) {
-			nextInterfaceSet(next_interface, cursor_line, PAGE_JUMP_INDEX, THIS_SEARCH_COLUMN_INDEX);
+			nextInterfaceSet(next_interface, cursor_line, PAGE_JUMP_INDEX, ITEMS_LIST_SETTING_SEARCH_INDEX);
 		} else if (column == THIS_JUMP_COLUMN_INDEX) {
-			nextInterfaceSet(next_interface, cursor_line, PAGE_JUMP_INDEX, THIS_JUMP_COLUMN_INDEX);
+			nextInterfaceSet(next_interface, cursor_line, PAGE_JUMP_INDEX, ITEMS_LIST_SETTING_JUMP_INDEX);
 		} else if (column == THIS_BACK_COLUMN_INDEX) {
 			nextInterfaceSet(next_interface, cursor_line, SETTING_INDEX, ITEM_LIST_SETTING_IN_SETTING);
 		}
