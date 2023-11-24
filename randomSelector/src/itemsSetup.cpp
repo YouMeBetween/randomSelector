@@ -213,9 +213,9 @@ void CItemsSetup::enter(int &next_interface, int &cursor_line)
 {
 	if (line == OPTION_LINE) {
 		if (column == THIS_SEARCH_COLUMN_INDEX) {
-			nextInterfaceSet(next_interface, cursor_line, PAGE_JUMP_INDEX, THIS_SEARCH_COLUMN_INDEX);
+			nextInterfaceSet(next_interface, cursor_line, PAGE_JUMP_INDEX, ITEMS_SETUP_SEARCH_INDEX);
 		} else if (column == THIS_JUMP_COLUMN_INDEX) {
-			nextInterfaceSet(next_interface, cursor_line, PAGE_JUMP_INDEX, THIS_JUMP_COLUMN_INDEX);
+			nextInterfaceSet(next_interface, cursor_line, PAGE_JUMP_INDEX, ITEMS_SETUP_JUMP_INDEX);
 		} else if (column == THIS_ADD_ITEMS_INDEX) {
 			nextInterfaceSet(next_interface, cursor_line, ADD_ITEMS_INDEX, NO_LINE);
 		} else if (column == THIS_BACK_COLUMN_INDEX) {

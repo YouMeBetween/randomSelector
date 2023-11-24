@@ -16,12 +16,15 @@ constexpr int INPUT_JUMP_ARROW_OFFSET = 13;
 constexpr int INPUT_SEARCH_OFFSET = 11;
 constexpr int INPUT_JUMP_OFFSET = 15;
 constexpr int CONFIRM_ARROW_OFFSET = 12;
+constexpr int SEARCH_OR_JUMP = 0b001;
+constexpr int IS_FROM_ITEMS_SETUP = 0b010;
+constexpr int IS_FROM_ITEMS_LIST_SETTING = 0b100;
 
 void CPageJump::show()
 {
 	system("cls");
 	cout << "********************************\n";
-	if (type == 0) {
+	if ((type & SEARCH_OR_JUMP) == 0) {
 		cout << "*     请输入想要搜索的条目     *\n";
 	} else {
 		cout << "*     请输入想要跳转的页面     *\n";
@@ -37,13 +40,13 @@ void CPageJump::setTargetPage()
 	string input_str;
 	CItems temp;
 	vector<Item> items = temp.getItems();
-	if (type == 0) {
+	if ((type & SEARCH_OR_JUMP) == 0) {
 		gotoxy(INPUT_SEARCH_ARROW_OFFSET, INPUT_LINE);
 	} else {
 		gotoxy(INPUT_JUMP_ARROW_OFFSET, INPUT_LINE);
 	}
 	cout << " ";
-	if (type == 0) {
+	if ((type & SEARCH_OR_JUMP) == 0) {
 		gotoxy(INPUT_SEARCH_OFFSET, INPUT_LINE);
 	} else {
 		gotoxy(INPUT_JUMP_OFFSET, INPUT_LINE);
@@ -51,20 +54,20 @@ void CPageJump::setTargetPage()
 	showCursor();
 	cin >> input_str;
 	hideCursor();
-	if (type == 0) {
+	if ((type & SEARCH_OR_JUMP) == 0) {
 		for (auto iter = items.begin(); iter != items.end(); iter++) {
 			if (iter->name == input_str) {
 				page = (iter - items.begin()) / ITEMS_PER_PAGE_IN_ITEMS_SETUP;
 				break;
 			}
 		}
-	} else if (type == 1) {
+	} else if ((type & SEARCH_OR_JUMP) == 1) {
 		page = max(min(stoi(input_str) - 1, items.size() / ITEMS_PER_PAGE_IN_ITEMS_SETUP), 0);
 	}
 	if (setItem("res/cfg.ini", "page", to_string(page))) {
 		CErrorPrompt error_prompt("打开cfg.ini文件失败");
 	}
-	if (type == 0) {
+	if ((type & SEARCH_OR_JUMP) == 0) {
 		gotoxy(INPUT_SEARCH_ARROW_OFFSET, INPUT_LINE);
 	} else {
 		gotoxy(INPUT_JUMP_ARROW_OFFSET, INPUT_LINE);
@@ -77,13 +80,13 @@ void CPageJump::moveCursor(int target_line)
 	if (target_line == INPUT_LINE) {
 		gotoxy(CONFIRM_ARROW_OFFSET, CONFIRM_LINE);
 		cout << " ";
-		if (type == 0) {
+		if ((type & SEARCH_OR_JUMP) == 0) {
 			gotoxy(INPUT_SEARCH_ARROW_OFFSET, INPUT_LINE);
 		} else {
 			gotoxy(INPUT_JUMP_ARROW_OFFSET, INPUT_LINE);
 		}
 	} else {
-		if (type == 0) {
+		if ((type & SEARCH_OR_JUMP) == 0) {
 			gotoxy(INPUT_SEARCH_ARROW_OFFSET, INPUT_LINE);
 		} else {
 			gotoxy(INPUT_JUMP_ARROW_OFFSET, INPUT_LINE);
