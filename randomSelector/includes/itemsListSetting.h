@@ -14,7 +14,6 @@ private:
 	int page;
 	vector<string> list_name;
 	void show();
-	void get_need_file(string, vector<string> &, string);
 	void displayLists(int);
 	void optionLineMoveCursor(int);
 	void itemsLineMoveCursor(int);

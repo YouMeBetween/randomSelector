@@ -3,7 +3,6 @@
 #include <vector>
 #include <string>
 #include <cstdlib>
-#include <io.h>
 #include "../includes/itemsListSetting.h"
 #include "../includes/index.h"
 using namespace std;
@@ -41,21 +40,6 @@ void CItemsListSetting::show()
 	}
 	cout << "*       上一页     ||     下一页       *\n";
 	cout << "****************************************\n";
-}
-
-void CItemsListSetting::get_need_file(string path, vector<string> &file, string ext)
-{
-	intptr_t file_handle = 0;
-	struct _finddata_t file_info;
-	string name;
-	string temp;
-	if ((file_handle = _findfirst(temp.assign(path).append("/*" + ext).c_str(), &file_info)) != -1) {
-		do {
-			name = file_info.name;
-			file.push_back(name.substr(0, name.rfind(".")));
-		} while (_findnext(file_handle, &file_info) == 0);
-		_findclose(file_handle);
-	}
 }
 
 void CItemsListSetting::displayLists(int target_page)

@@ -5,6 +5,7 @@
 #include <vector>
 #include <map>
 #include <Windows.h>
+#include <io.h>
 #include "../includes/interfaceBase.h"
 
 using namespace std;
@@ -95,4 +96,18 @@ void CInterfaceBase::hideCursor()
 	GetConsoleCursorInfo(handle, &cursorInfo);
 	cursorInfo.bVisible = false;
 	SetConsoleCursorInfo(handle, &cursorInfo);
+}
+
+void CInterfaceBase::get_need_file(string path, vector<string> &file, string ext)
+{
+	intptr_t file_handle = 0;
+	struct _finddata_t file_info;
+	string name, temp;
+	if ((file_handle = _findfirst(temp.assign(path).append("/*" + ext).c_str(), &file_info)) != -1) {
+		do {
+			name = file_info.name;
+			file.push_back(name.substr(0, name.rfind(".")));
+		} while (_findnext(file_handle, &file_info) == 0);
+		_findclose(file_handle);
+	}
 }

@@ -1,6 +1,7 @@
 #ifndef _INTERFACE_BASE_H_
 #define _INTERFACE_BASE_H_
 #include <string>
+#include <vector>
 
 using namespace std;
 
@@ -20,5 +21,6 @@ protected:
 	void nextInterfaceSet(int &, int &, int, int);
 	void showCursor();
 	void hideCursor();
+	void get_need_file(string, vector<string> &, string);
 };
 #endif // !_INTERFACE_BASE_H_
