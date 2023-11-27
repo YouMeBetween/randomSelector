@@ -131,6 +131,7 @@
     <ClCompile Include="src\addItems.cpp" />
     <ClCompile Include="src\editItems.cpp" />
     <ClCompile Include="src\editItemsBase.cpp" />
+    <ClCompile Include="src\editListBase.cpp" />
     <ClCompile Include="src\errorPrompt.cpp" />
     <ClCompile Include="src\interfaceBase.cpp" />
     <ClCompile Include="src\items.cpp" />
@@ -145,6 +146,7 @@
     <ClInclude Include="includes\addItems.h" />
     <ClInclude Include="includes\editItems.h" />
     <ClInclude Include="includes\editItemsBase.h" />
+    <ClInclude Include="includes\editListBase.h" />
     <ClInclude Include="includes\errorPrompt.h" />
     <ClInclude Include="includes\index.h" />
     <ClInclude Include="includes\interfaceBase.h" />
