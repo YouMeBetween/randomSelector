@@ -53,6 +53,7 @@ void CEditListBase::confirm(int &next_interface, int &cursor_line, bool is_add)
 {
 	int page;
 	vector<string> files;
+	get_need_file("res", files, ".csv");
 	if (name == "") {
 		gotoxy(PROMPT_OFFSET_IN_EDIT_LIST_BASE, CONFIRM_LINE_IN_EDIT_LIST_BASE);
 		cout << "                   ";
@@ -61,6 +62,13 @@ void CEditListBase::confirm(int &next_interface, int &cursor_line, bool is_add)
 		return;
 	}
 	if (is_add) {
+		if (find(files.begin(), files.end(), name) != files.end()) {
+			gotoxy(PROMPT_OFFSET_IN_EDIT_LIST_BASE, CONFIRM_LINE_IN_EDIT_LIST_BASE);
+			cout << "                   ";
+			gotoxy(PROMPT_OFFSET_IN_EDIT_LIST_BASE, CONFIRM_LINE_IN_EDIT_LIST_BASE);
+			cout << "与已有项重复";
+			return;
+		}
 		addCsv();
 	} else {
 		string item_want_edit = getItem("res/cfg.ini", "itemWantEdit");
@@ -68,7 +76,6 @@ void CEditListBase::confirm(int &next_interface, int &cursor_line, bool is_add)
 			CErrorPrompt error_prompt("重命名文件失败");
 		}
 	}
-	get_need_file("res", files, ".csv");
 	auto iter = find(files.begin(), files.end(), name);
 	page = distance(files.begin(), iter) / LIST_PER_PAGE_IN_ITEMS_LIST_SETTING;
 	if (setItem("res/cfg.ini", "page", to_string(page))) {
