@@ -23,7 +23,7 @@ void CAddList::show()
 CAddList::CAddList()
 {
 	line = FIRST_LINE_IN_EDIT_LIST_BASE;
-	name = getItem("res", "itemWantEdit");
+	name = "";
 	show();
 }
 
