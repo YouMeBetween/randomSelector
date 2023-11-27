@@ -34,19 +34,19 @@ void CEditItems::show()
 	}
 	for (auto iter = items.begin(); iter != items.end(); iter++) {
 		if (iter->name == item_want_edit) {
-			gotoxy(INPUT_OFFSET, NAME_LINE);
+			gotoxy(INPUT_OFFSET_IN_EDIT_ITEMS_BASE, NAME_LINE_IN_EDIT_ITEMS_BASE);
 			item.name = iter->name;
 			cout << iter->name;
-			gotoxy(INPUT_OFFSET, WEIGHT_LINE);
+			gotoxy(INPUT_OFFSET_IN_EDIT_ITEMS_BASE, WEIGHT_LINE_IN_EDIT_ITEMS_BASE);
 			item.weight = iter->weight;
 			cout << iter->weight;
 			if (iter->min_weight != 0) {
-				gotoxy(INPUT_OFFSET, MIN_WEIGHT_LINE);
+				gotoxy(INPUT_OFFSET_IN_EDIT_ITEMS_BASE, MIN_WEIGHT_LINE_IN_EDIT_ITEMS_BASE);
 				item.min_weight = iter->min_weight;
 				cout << iter->min_weight;
 			}
 			if (iter->max_weight != 0) {
-				gotoxy(INPUT_OFFSET, MAX_WEIGHT_LINE);
+				gotoxy(INPUT_OFFSET_IN_EDIT_ITEMS_BASE, MAX_WEIGHT_LINE_IN_EDIT_ITEMS_BASE);
 				item.max_weight = iter->max_weight;
 				cout << iter->max_weight;
 			}
@@ -63,7 +63,7 @@ void CEditItems::remove()
 
 CEditItems::CEditItems()
 {
-	line = FIRST_LINE;
+	line = FIRST_LINE_IN_EDIT_ITEMS_BASE;
 	item.name = "";
 	item.weight = 0;
 	item.min_weight = 0;
@@ -82,11 +82,11 @@ void CEditItems::enter(int &next_interface, int &cursor_line)
 {
 	switch (line)
 	{
-		case NAME_LINE: setName(); break;
-		case WEIGHT_LINE: setWeight(); break;
-		case MIN_WEIGHT_LINE: setMinWeight(); break;
-		case MAX_WEIGHT_LINE: setMaxWeight(); break;
-		case CONFIRM_LINE: confirm(next_interface, cursor_line, false); break;
+		case NAME_LINE_IN_EDIT_ITEMS_BASE: setName(); break;
+		case WEIGHT_LINE_IN_EDIT_ITEMS_BASE: setWeight(); break;
+		case MIN_WEIGHT_LINE_IN_EDIT_ITEMS_BASE: setMinWeight(); break;
+		case MAX_WEIGHT_LINE_IN_EDIT_ITEMS_BASE: setMaxWeight(); break;
+		case CONFIRM_LINE_IN_EDIT_ITEMS_BASE: confirm(next_interface, cursor_line, false); break;
 		case REMOVE_LINE: remove();
 		default:
 		case QUIT_LINE: {

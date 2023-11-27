@@ -5,12 +5,12 @@
 
 using namespace std;
 
-constexpr int FIRST_LINE = 3;
-constexpr int NAME_LINE = 3;
-constexpr int CONFIRM_LINE = 4;
-constexpr int ARROW_OFFSET = 2;
-constexpr int INPUT_OFFSET = 16;
-constexpr int PROMPT_OFFSET = 12;
+constexpr int FIRST_LINE_IN_EDIT_LIST_BASE = 3;
+constexpr int NAME_LINE_IN_EDIT_LIST_BASE = 3;
+constexpr int CONFIRM_LINE_IN_EDIT_LIST_BASE = 4;
+constexpr int ARROW_OFFSET_IN_EDIT_LIST_BASE = 2;
+constexpr int INPUT_OFFSET_IN_EDIT_LIST_BASE = 16;
+constexpr int PROMPT_OFFSET_IN_EDIT_LIST_BASE = 12;
 
 class CEditListBase : public CInterfaceBase
 {

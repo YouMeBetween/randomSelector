@@ -184,12 +184,15 @@ void CItemsListSetting::right()
 void CItemsListSetting::enter(int &next_interface, int &cursor_line)
 {
 	if (line == OPTION_LINE) {
-		if (column == THIS_SEARCH_COLUMN_INDEX) {
-			nextInterfaceSet(next_interface, cursor_line, PAGE_JUMP_INDEX, ITEMS_LIST_SETTING_SEARCH_INDEX);
-		} else if (column == THIS_JUMP_COLUMN_INDEX) {
-			nextInterfaceSet(next_interface, cursor_line, PAGE_JUMP_INDEX, ITEMS_LIST_SETTING_JUMP_INDEX);
-		} else if (column == THIS_BACK_COLUMN_INDEX) {
-			nextInterfaceSet(next_interface, cursor_line, SETTING_INDEX, ITEM_LIST_SETTING_IN_SETTING);
+		switch (column) {
+			case THIS_SEARCH_COLUMN_INDEX:
+				nextInterfaceSet(next_interface, cursor_line, PAGE_JUMP_INDEX, ITEMS_LIST_SETTING_SEARCH_INDEX); break;
+			case THIS_JUMP_COLUMN_INDEX:
+				nextInterfaceSet(next_interface, cursor_line, PAGE_JUMP_INDEX, ITEMS_LIST_SETTING_JUMP_INDEX); break;
+			case THIS_ADD_ITEM_COLUMN_INDEX: 
+				nextInterfaceSet(next_interface, cursor_line, ADD_LIST_INDEX, NO_LINE); break;
+			case THIS_BACK_COLUMN_INDEX:
+				nextInterfaceSet(next_interface, cursor_line, SETTING_INDEX, ITEM_LIST_SETTING_IN_SETTING); break;
 		}
 	} else if (line == PAGE_TURNING_LINE) {
 		if (column == THIS_PREV_COLUMN_INDEX && page > 0) {

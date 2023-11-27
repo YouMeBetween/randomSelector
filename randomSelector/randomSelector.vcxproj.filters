@@ -57,6 +57,9 @@
     <ClCompile Include="src\editListBase.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="src\addList.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="includes\items.h">
@@ -99,6 +102,9 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="includes\editListBase.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\addList.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

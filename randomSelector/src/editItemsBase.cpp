@@ -10,30 +10,30 @@ using namespace std;
 
 CEditItemsBase::CEditItemsBase()
 {
-	line = FIRST_LINE;
+	line = FIRST_LINE_IN_EDIT_ITEMS_BASE;
 }
 
 void CEditItemsBase::up()
 {
-	if (line > FIRST_LINE) {
+	if (line > FIRST_LINE_IN_EDIT_ITEMS_BASE) {
 		moveCursor(line - 1);
 	}
 }
 
 void CEditItemsBase::moveCursor(int target)
 {
-	gotoxy(ARROW_OFFSET, line);
+	gotoxy(ARROW_OFFSET_IN_EDIT_ITEMS_BASE, line);
 	cout << " ";
 	line = target;
-	gotoxy(ARROW_OFFSET, line);
+	gotoxy(ARROW_OFFSET_IN_EDIT_ITEMS_BASE, line);
 	cout << ">";
 }
 
 void CEditItemsBase::setName()
 {
-	gotoxy(INPUT_OFFSET, NAME_LINE);
+	gotoxy(INPUT_OFFSET_IN_EDIT_ITEMS_BASE, NAME_LINE_IN_EDIT_ITEMS_BASE);
 	cout << "               ";
-	gotoxy(INPUT_OFFSET, NAME_LINE);
+	gotoxy(INPUT_OFFSET_IN_EDIT_ITEMS_BASE, NAME_LINE_IN_EDIT_ITEMS_BASE);
 	showCursor();
 	cin >> item.name;
 	hideCursor();
@@ -41,7 +41,7 @@ void CEditItemsBase::setName()
 
 void CEditItemsBase::weightRangeCheck()
 {
-	gotoxy(INPUT_OFFSET, WEIGHT_LINE);
+	gotoxy(INPUT_OFFSET_IN_EDIT_ITEMS_BASE, WEIGHT_LINE_IN_EDIT_ITEMS_BASE);
 	cout << "               ";
 	if (item.weight == 0) {
 		return;
@@ -52,16 +52,16 @@ void CEditItemsBase::weightRangeCheck()
 	if (item.max_weight != 0) {
 		item.weight = min(item.weight, item.max_weight);
 	}
-	gotoxy(INPUT_OFFSET, WEIGHT_LINE);
+	gotoxy(INPUT_OFFSET_IN_EDIT_ITEMS_BASE, WEIGHT_LINE_IN_EDIT_ITEMS_BASE);
 	cout << item.weight;
 }
 
 void CEditItemsBase::setWeight()
 {
 	string input_str;
-	gotoxy(INPUT_OFFSET, WEIGHT_LINE);
+	gotoxy(INPUT_OFFSET_IN_EDIT_ITEMS_BASE, WEIGHT_LINE_IN_EDIT_ITEMS_BASE);
 	cout << "               ";
-	gotoxy(INPUT_OFFSET, WEIGHT_LINE);
+	gotoxy(INPUT_OFFSET_IN_EDIT_ITEMS_BASE, WEIGHT_LINE_IN_EDIT_ITEMS_BASE);
 	showCursor();
 	cin >> input_str;
 	hideCursor();
@@ -72,9 +72,9 @@ void CEditItemsBase::setWeight()
 void CEditItemsBase::setMinWeight()
 {
 	string input_str;
-	gotoxy(INPUT_OFFSET, MIN_WEIGHT_LINE);
+	gotoxy(INPUT_OFFSET_IN_EDIT_ITEMS_BASE, MIN_WEIGHT_LINE_IN_EDIT_ITEMS_BASE);
 	cout << "               ";
-	gotoxy(INPUT_OFFSET, MIN_WEIGHT_LINE);
+	gotoxy(INPUT_OFFSET_IN_EDIT_ITEMS_BASE, MIN_WEIGHT_LINE_IN_EDIT_ITEMS_BASE);
 	showCursor();
 	cin >> input_str;
 	hideCursor();
@@ -82,10 +82,10 @@ void CEditItemsBase::setMinWeight()
 	if (item.max_weight != 0) {
 		item.min_weight = min(item.min_weight, item.max_weight);
 	}
-	gotoxy(INPUT_OFFSET, MIN_WEIGHT_LINE);
+	gotoxy(INPUT_OFFSET_IN_EDIT_ITEMS_BASE, MIN_WEIGHT_LINE_IN_EDIT_ITEMS_BASE);
 	cout << "               ";
 	if (item.min_weight != 0) {
-		gotoxy(INPUT_OFFSET, MIN_WEIGHT_LINE);
+		gotoxy(INPUT_OFFSET_IN_EDIT_ITEMS_BASE, MIN_WEIGHT_LINE_IN_EDIT_ITEMS_BASE);
 		cout << item.min_weight;
 	}
 	weightRangeCheck();
@@ -94,17 +94,17 @@ void CEditItemsBase::setMinWeight()
 void CEditItemsBase::setMaxWeight()
 {
 	string input_str;
-	gotoxy(INPUT_OFFSET, MAX_WEIGHT_LINE);
+	gotoxy(INPUT_OFFSET_IN_EDIT_ITEMS_BASE, MAX_WEIGHT_LINE_IN_EDIT_ITEMS_BASE);
 	cout << "               ";
-	gotoxy(INPUT_OFFSET, MAX_WEIGHT_LINE);
+	gotoxy(INPUT_OFFSET_IN_EDIT_ITEMS_BASE, MAX_WEIGHT_LINE_IN_EDIT_ITEMS_BASE);
 	showCursor();
 	cin >> input_str;
 	hideCursor();
 	item.max_weight = max(atoi(input_str.c_str()), item.min_weight);
-	gotoxy(INPUT_OFFSET, MAX_WEIGHT_LINE);
+	gotoxy(INPUT_OFFSET_IN_EDIT_ITEMS_BASE, MAX_WEIGHT_LINE_IN_EDIT_ITEMS_BASE);
 	cout << "               ";
 	if (item.max_weight != 0) {
-		gotoxy(INPUT_OFFSET, MAX_WEIGHT_LINE);
+		gotoxy(INPUT_OFFSET_IN_EDIT_ITEMS_BASE, MAX_WEIGHT_LINE_IN_EDIT_ITEMS_BASE);
 		cout << item.max_weight;
 	}
 	weightRangeCheck();
@@ -116,9 +116,9 @@ void CEditItemsBase::confirm(int &next_interface, int &cursor_line, bool is_add)
 	Item temp;
 	CItems items;
 	if (item.name == "" || item.weight == 0) {
-		gotoxy(PROMPT_OFFSET, CONFIRM_LINE);
+		gotoxy(PROMPT_OFFSET_IN_EDIT_ITEMS_BASE, CONFIRM_LINE_IN_EDIT_ITEMS_BASE);
 		cout << "                   ";
-		gotoxy(PROMPT_OFFSET, CONFIRM_LINE);
+		gotoxy(PROMPT_OFFSET_IN_EDIT_ITEMS_BASE, CONFIRM_LINE_IN_EDIT_ITEMS_BASE);
 		cout << "未输入名称或权重";
 		return;
 	}

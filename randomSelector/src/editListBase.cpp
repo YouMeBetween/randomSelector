@@ -19,31 +19,31 @@ void CEditListBase::addCsv()
 
 CEditListBase::CEditListBase()
 {
-	line = FIRST_LINE;
+	line = FIRST_LINE_IN_EDIT_LIST_BASE;
 	name = "";
 }
 
 void CEditListBase::up()
 {
-	if (line > FIRST_LINE) {
+	if (line > FIRST_LINE_IN_EDIT_LIST_BASE) {
 		moveCursor(line - 1);
 	}
 }
 
 void CEditListBase::moveCursor(int target)
 {
-	gotoxy(ARROW_OFFSET, line);
+	gotoxy(ARROW_OFFSET_IN_EDIT_LIST_BASE, line);
 	cout << " ";
 	line = target;
-	gotoxy(ARROW_OFFSET, line);
+	gotoxy(ARROW_OFFSET_IN_EDIT_LIST_BASE, line);
 	cout << ">";
 }
 
 void CEditListBase::setName()
 {
-	gotoxy(INPUT_OFFSET, NAME_LINE);
+	gotoxy(INPUT_OFFSET_IN_EDIT_LIST_BASE, NAME_LINE_IN_EDIT_LIST_BASE);
 	cout << "               ";
-	gotoxy(INPUT_OFFSET, NAME_LINE);
+	gotoxy(INPUT_OFFSET_IN_EDIT_LIST_BASE, NAME_LINE_IN_EDIT_LIST_BASE);
 	showCursor();
 	cin >> name;
 	hideCursor();
@@ -54,9 +54,9 @@ void CEditListBase::confirm(int &next_interface, int &cursor_line, bool is_add)
 	int page;
 	vector<string> files;
 	if (name == "") {
-		gotoxy(PROMPT_OFFSET, CONFIRM_LINE);
+		gotoxy(PROMPT_OFFSET_IN_EDIT_LIST_BASE, CONFIRM_LINE_IN_EDIT_LIST_BASE);
 		cout << "                   ";
-		gotoxy(PROMPT_OFFSET, CONFIRM_LINE);
+		gotoxy(PROMPT_OFFSET_IN_EDIT_LIST_BASE, CONFIRM_LINE_IN_EDIT_LIST_BASE);
 		cout << "Î´ÊäÈëÃû³Æ";
 		return;
 	}

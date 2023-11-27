@@ -25,7 +25,7 @@ void CAddItems::show()
 
 CAddItems::CAddItems()
 {
-	line = FIRST_LINE;
+	line = FIRST_LINE_IN_EDIT_ITEMS_BASE;
 	item.name = "";
 	item.weight = 0;
 	item.min_weight = 0;
@@ -44,11 +44,11 @@ void CAddItems::enter(int &next_interface, int &cursor_line)
 {
 	switch (line)
 	{
-		case NAME_LINE: setName(); break;
-		case WEIGHT_LINE: setWeight(); break;
-		case MIN_WEIGHT_LINE: setMinWeight(); break;
-		case MAX_WEIGHT_LINE: setMaxWeight(); break;
-		case CONFIRM_LINE: confirm(next_interface, cursor_line, true); break;
+		case NAME_LINE_IN_EDIT_ITEMS_BASE: setName(); break;
+		case WEIGHT_LINE_IN_EDIT_ITEMS_BASE: setWeight(); break;
+		case MIN_WEIGHT_LINE_IN_EDIT_ITEMS_BASE: setMinWeight(); break;
+		case MAX_WEIGHT_LINE_IN_EDIT_ITEMS_BASE: setMaxWeight(); break;
+		case CONFIRM_LINE_IN_EDIT_ITEMS_BASE: confirm(next_interface, cursor_line, true); break;
 		default:
 		case QUIT_LINE: nextInterfaceSet(next_interface, cursor_line, ITEMS_SETUP_INDEX, NO_LINE); break;
 	}
