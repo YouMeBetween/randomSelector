@@ -10,6 +10,7 @@ constexpr int ADD_ITEMS_INDEX = 6;
 constexpr int EDIT_ITEMS_INDEX = 7;
 constexpr int ITEMS_LIST_SETTING_INDEX = 8;
 constexpr int ADD_LIST_INDEX = 9;
+constexpr int EDIT_LIST_INDEX = 10;
 constexpr int NO_LINE = -1;
 constexpr int RESULT_SHOW_LINE_IN_MAIN_MENU = 3;
 constexpr int SETTING_LINE_IN_MAIN_MENU = 4;

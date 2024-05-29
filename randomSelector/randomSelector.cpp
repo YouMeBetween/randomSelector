@@ -11,6 +11,7 @@
 #include "includes/editItems.h"
 #include "includes/itemsListSetting.h"
 #include "includes/addList.h"
+#include "includes/editList.h"
 #include "includes/index.h"
 using namespace std;
 
@@ -104,6 +105,11 @@ void switchInterface(shared_ptr<CInterfaceBase> &interface_base, int &next_inter
 		case ADD_LIST_INDEX: {
 			shared_ptr<CAddList> add_list = make_shared<CAddList>();
 			interface_base = add_list;
+			break;
+		}
+		case EDIT_LIST_INDEX: {
+			shared_ptr<CEditList> edit_list = make_shared<CEditList>();
+			interface_base = edit_list;
 			break;
 		}
 	}

@@ -194,6 +194,12 @@ void CItemsListSetting::enter(int &next_interface, int &cursor_line)
 			case THIS_BACK_COLUMN_INDEX:
 				nextInterfaceSet(next_interface, cursor_line, SETTING_INDEX, ITEM_LIST_SETTING_IN_SETTING); break;
 		}
+	} else if (line >= ITEMS_LINE && line <= ITEMS_LINE_LAST) {
+		if (setItem("res/cfg.ini", "itemWantEdit",
+					list_name.at(page * LIST_PER_PAGE_IN_ITEMS_LIST_SETTING + line - OPTION_LINE - 1))) {
+			CErrorPrompt error_prompt("打开cfg.ini文件失败");
+		}
+		nextInterfaceSet(next_interface, cursor_line, EDIT_LIST_INDEX, NO_LINE);
 	} else if (line == PAGE_TURNING_LINE) {
 		if (column == THIS_PREV_COLUMN_INDEX && page > 0) {
 			displayLists(page - 1);
