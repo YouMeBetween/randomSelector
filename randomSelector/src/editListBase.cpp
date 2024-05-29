@@ -76,6 +76,7 @@ void CEditListBase::confirm(int &next_interface, int &cursor_line, bool is_add)
 			CErrorPrompt error_prompt("重命名文件失败");
 		}
 	}
+	get_need_file("res", files, ".csv");
 	auto iter = find(files.begin(), files.end(), name);
 	page = distance(files.begin(), iter) / LIST_PER_PAGE_IN_ITEMS_LIST_SETTING;
 	if (setItem("res/cfg.ini", "page", to_string(page))) {

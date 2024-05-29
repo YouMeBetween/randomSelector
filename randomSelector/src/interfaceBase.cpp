@@ -103,6 +103,7 @@ void CInterfaceBase::get_need_file(string path, vector<string> &file, string ext
 	intptr_t file_handle = 0;
 	struct _finddata_t file_info;
 	string name, temp;
+	file.clear();
 	if ((file_handle = _findfirst(temp.assign(path).append("/*" + ext).c_str(), &file_info)) != -1) {
 		do {
 			name = file_info.name;
