@@ -34,7 +34,7 @@ void CItemsListSetting::show()
 {
 	system("cls");
 	cout << "****************************************\n";
-	cout << "*               选项列表               *\n";
+	cout << "*             选项列表设置             *\n";
 	cout << "****************************************\n";
 	cout << "*   > 搜索    跳转    新增    返回     *\n";
 	for (int i = 0; i != LIST_PER_PAGE_IN_ITEMS_LIST_SETTING; i++) {
