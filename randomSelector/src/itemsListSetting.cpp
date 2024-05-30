@@ -191,7 +191,9 @@ void CItemsListSetting::enter(int &next_interface, int &cursor_line)
 	if (line == OPTION_LINE) {
 		switch (column) {
 			case THIS_SEARCH_COLUMN_INDEX:
-				nextInterfaceSet(next_interface, cursor_line, PAGE_JUMP_INDEX, ITEMS_LIST_SETTING_SEARCH_INDEX); break;
+				setItem("res/cfg.ini", "page", to_string(page));
+				nextInterfaceSet(next_interface, cursor_line, PAGE_JUMP_INDEX, ITEMS_LIST_SETTING_SEARCH_INDEX);
+				break;
 			case THIS_JUMP_COLUMN_INDEX:
 				nextInterfaceSet(next_interface, cursor_line, PAGE_JUMP_INDEX, ITEMS_LIST_SETTING_JUMP_INDEX); break;
 			case THIS_ADD_ITEM_COLUMN_INDEX: 

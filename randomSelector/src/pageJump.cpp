@@ -57,12 +57,7 @@ void CPageJump::writePage(int page)
 	if (setItem("res/cfg.ini", "page", to_string(page))) {
 		CErrorPrompt error_prompt("打开cfg.ini文件失败");
 	}
-	if (!(type & SEARCH_OR_JUMP)) {
-		gotoxy(INPUT_SEARCH_ARROW_OFFSET, INPUT_LINE);
-	} else {
-		gotoxy(INPUT_JUMP_ARROW_OFFSET, INPUT_LINE);
-	}
-	cout << ">";
+	moveCursor(INPUT_LINE);
 }
 
 void CPageJump::setItemsSetupPage()
@@ -73,7 +68,12 @@ void CPageJump::setItemsSetupPage()
 	string input_str = getInput();
 	if (!(type & SEARCH_OR_JUMP)) {
 		auto iter = find_if(items.begin(), items.end(), [input_str](Item item) { return item.name == input_str; });
-		page = distance(items.begin(), iter) / ITEMS_PER_PAGE_IN_ITEMS_SETUP;
+		if (iter == items.end()) {
+			moveCursor(INPUT_LINE);
+			return;
+		} else {
+			page = distance(items.begin(), iter) / ITEMS_PER_PAGE_IN_ITEMS_SETUP;
+		}
 	} else if (type & SEARCH_OR_JUMP) {
 		page = max(min(stoi(input_str) - 1, items.size() / ITEMS_PER_PAGE_IN_ITEMS_SETUP), 0);
 	}
@@ -88,7 +88,12 @@ void CPageJump::setItemsListSettingPage()
 	string input_str = getInput();
 	if (!(type & SEARCH_OR_JUMP)) {
 		auto iter = find(files.begin(), files.end(), input_str);
-		page = distance(files.begin(), iter) / LIST_PER_PAGE_IN_ITEMS_LIST_SETTING;
+		if (iter == files.end()) {
+			moveCursor(INPUT_LINE);
+			return;
+		} else {
+			page = distance(files.begin(), iter) / LIST_PER_PAGE_IN_ITEMS_LIST_SETTING;
+		}
 	} else if (type & SEARCH_OR_JUMP) {
 		page = max(min(stoi(input_str) - 1, files.size() / LIST_PER_PAGE_IN_ITEMS_LIST_SETTING), 0);
 	}
