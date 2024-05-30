@@ -30,7 +30,7 @@ void CItems::adjustWeights(string choice_name)
 
 void CItems::writeCsv()
 {
-	ofstream csv_data("res/cfg.csv", ios::out);
+	ofstream csv_data("res/" + getItem("res/cfg.ini", "selectedList") + ".csv", ios::out);
 	csv_data << "项目,权重,最低权重,最高权重,开关\n";
 	for (auto iter = items.begin(); iter != items.end(); iter++) {
 		csv_data << iter->name << "," << iter->weight << "," << iter->min_weight << "," << iter->max_weight << ","
@@ -74,7 +74,7 @@ bool CItems::getOnOffSetting(string index)
 
 CItems::CItems()
 {
-	ifstream csv_data("res/cfg.csv", ios::in);
+	ifstream csv_data("res/" + getItem("res/cfg.ini", "selectedList") + ".csv", ios::in);
 	string line, word;
 	istringstream sin;
 	vector<string> words;
