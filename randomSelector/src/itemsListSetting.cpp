@@ -14,10 +14,11 @@ constexpr int ITEMS_LINE_LAST = 8;
 constexpr int PAGE_TURNING_LINE = 9;
 constexpr int OPTION_LINE_MAX_COLUMN = 3;
 constexpr int PAGE_TURNING_LINE_MAX_COLUMN = 1;
+constexpr int SELECT_OFFSET = 9;
 constexpr int ITEMS_OFFSET = 11;
 constexpr int OPTION_LINE_ARROW_OFFSET = 4;
 constexpr int OPTION_LINE_ARROW_INTERVAL = 8;
-constexpr int ITEMS_ARROW_OFFSET = 9;
+constexpr int ITEMS_ARROW_OFFSET = 7;
 constexpr int PAGE_TURNING_ARROW_OFFSET = 6;
 constexpr int PAGE_TURNING_ARROW_INTERVAL = 18;
 constexpr int CURRENT_PAGE_OFFSET = 17;
@@ -58,6 +59,10 @@ void CItemsListSetting::displayLists(int target_page)
 		gotoxy(ITEMS_OFFSET, ITEMS_LINE + i);
 		cout << page * LIST_PER_PAGE_IN_ITEMS_LIST_SETTING + i + 1 << "."
 			 << list_name.at(page * LIST_PER_PAGE_IN_ITEMS_LIST_SETTING + i);
+		if (list_name.at(page * LIST_PER_PAGE_IN_ITEMS_LIST_SETTING + i) == getItem("res/cfg.ini", "selectedList")) {
+			gotoxy(SELECT_OFFSET, ITEMS_LINE + i);
+			cout << "*";
+		}
 	}
 	gotoxy(CURRENT_PAGE_OFFSET, PAGE_TURNING_LINE);
 	cout << "  ";
