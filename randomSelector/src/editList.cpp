@@ -34,7 +34,17 @@ void CEditList::show()
 
 void CEditList::removeList(int &next_interface, int &cursor_line)
 {
+	vector<string> files;
+	get_need_file("res", files, ".csv");
+	if (files.size() == 1) {
+		gotoxy(PROMPT_OFFSET_IN_EDIT_LIST_BASE, REMOVE_LINE);
+		cout << "不能删除最后的列表";
+		return;
+	}
 	remove(("res/" + getItem("res/cfg.ini", "itemWantEdit") + ".csv").c_str());
+	if (getItem("res/cfg.ini", "itemWantEdit") == getItem("res/cfg.ini", "selectedList")) {
+		setItem("res/cfg.ini", "selectedList", files.at(0));
+	}
 	nextInterfaceSet(next_interface, cursor_line, ITEMS_LIST_SETTING_INDEX, NO_LINE);
 }
 
