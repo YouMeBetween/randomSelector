@@ -82,5 +82,6 @@ void CEditListBase::confirm(int &next_interface, int &cursor_line, bool is_add)
 	if (setItem("res/cfg.ini", "page", to_string(page))) {
 		CErrorPrompt error_prompt("打开cfg.ini文件失败");
 	}
+	setItem("res/cfg.ini", "selectedList", name);
 	nextInterfaceSet(next_interface, cursor_line, ITEMS_LIST_SETTING_INDEX, NO_LINE);
 }
