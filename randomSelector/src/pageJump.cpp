@@ -37,13 +37,11 @@ void CPageJump::show()
 string CPageJump::getInput()
 {
 	string input_str;
+	gotoxy(0, INPUT_LINE);
+	cout << "*                              *";
 	if (!(type & SEARCH_OR_JUMP)) {
-		gotoxy(INPUT_SEARCH_ARROW_OFFSET, INPUT_LINE);
-		cout << " ";
 		gotoxy(INPUT_SEARCH_OFFSET, INPUT_LINE);
 	} else {
-		gotoxy(INPUT_JUMP_ARROW_OFFSET, INPUT_LINE);
-		cout << " ";
 		gotoxy(INPUT_JUMP_OFFSET, INPUT_LINE);
 	}
 	showCursor();
