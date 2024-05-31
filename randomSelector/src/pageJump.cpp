@@ -69,10 +69,13 @@ void CPageJump::setItemsSetupPage()
 		if (iter == items.end()) {
 			moveCursor(INPUT_LINE);
 			return;
-		} else {
-			page = distance(items.begin(), iter) / ITEMS_PER_PAGE_IN_ITEMS_SETUP;
 		}
+		page = distance(items.begin(), iter) / ITEMS_PER_PAGE_IN_ITEMS_SETUP;
 	} else if (type & SEARCH_OR_JUMP) {
+		if (input_str.find_first_not_of("0123456789") != string::npos) {
+			moveCursor(INPUT_LINE);
+			return;
+		}
 		page = max(min(stoi(input_str) - 1, items.size() / ITEMS_PER_PAGE_IN_ITEMS_SETUP), 0);
 	}
 	writePage(page);
@@ -89,10 +92,13 @@ void CPageJump::setItemsListSettingPage()
 		if (iter == files.end()) {
 			moveCursor(INPUT_LINE);
 			return;
-		} else {
-			page = distance(files.begin(), iter) / LIST_PER_PAGE_IN_ITEMS_LIST_SETTING;
 		}
+		page = distance(files.begin(), iter) / LIST_PER_PAGE_IN_ITEMS_LIST_SETTING;
 	} else if (type & SEARCH_OR_JUMP) {
+		if (input_str.find_first_not_of("0123456789") != string::npos) {
+			moveCursor(INPUT_LINE);
+			return;
+		}
 		page = max(min(stoi(input_str) - 1, files.size() / LIST_PER_PAGE_IN_ITEMS_LIST_SETTING), 0);
 	}
 	writePage(page);
