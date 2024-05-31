@@ -15,8 +15,8 @@ constexpr int NO_LINE = -1;
 constexpr int RESULT_SHOW_LINE_IN_MAIN_MENU = 3;
 constexpr int SETTING_LINE_IN_MAIN_MENU = 4;
 constexpr int WEIGHT_SELECT_IN_SETTING = 3;
-constexpr int ITEM_LIST_SETTING_IN_SETTING = 5;
-constexpr int ITEM_SETUP_IN_SETTING = 6;
+constexpr int ITEM_SETUP_IN_SETTING = 5;
+constexpr int ITEM_LIST_SETTING_IN_SETTING = 6;
 constexpr int ITEMS_PER_PAGE_IN_ITEMS_SETUP = 5;
 constexpr int LIST_PER_PAGE_IN_ITEMS_LIST_SETTING = 5;
 /* 按位表示pageJump界面的类型

@@ -16,8 +16,8 @@ constexpr int LAST_LINE = 7;
 constexpr int FINAL_LINE = 8;
 constexpr int WEIGHT_SELECT_LINE = 3;
 constexpr int DYNAMIC_WEIGHT_LINE = 4;
-constexpr int ITEMS_LIST_SETTING = 5;
-constexpr int ITEMS_SETUP_LINE = 6;
+constexpr int ITEMS_SETUP_LINE = 5;
+constexpr int ITEMS_LIST_SETTING = 6;
 constexpr int BACK_LINE = 7;
 constexpr int ON_OFF_OFFSET = 21;
 constexpr int ARROW_OFFSET = 2;
@@ -46,8 +46,8 @@ void CSetting::show()
 	cout << "********************************\n";
 	cout << "*   1.根据权重选择  <  >       *\n";
 	cout << "*   2.动态权重      <  >       *\n";
-	cout << "*   3.选项列表设置             *\n";
-	cout << "*   4.选项设置                 *\n";
+	cout << "*   3.选项设置                 *\n";
+	cout << "*   4.选项列表设置             *\n";
 	cout << "*   5.返回                     *\n";
 	cout << "********************************\n";
 	for (auto iter = on_off_pos.begin(); iter != on_off_pos.end(); iter++) {
