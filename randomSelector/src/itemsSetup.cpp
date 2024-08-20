@@ -92,6 +92,8 @@ void CItemsSetup::optionLineMoveCursor(int target_column)
 {
 	if (line == ITEMS_LINE) {
 		gotoxy(ITEMS_ARROW_OFFSET, ITEMS_LINE);
+	} else if (line == PAGE_TURNING_LINE) {
+		gotoxy(PAGE_TURNING_ARROW_OFFSET + PAGE_TURNING_ARROW_INTERVAL * column, line);
 	} else {
 		gotoxy(OPTION_LINE_ARROW_OFFSET + OPTION_LINE_ARROW_INTERVAL * column, OPTION_LINE);
 	}
@@ -118,12 +120,14 @@ void CItemsSetup::itemsLineMoveCursor(int target_line)
 	cout << ">";
 }
 
-void CItemsSetup::pageTurningMoveCursor(int target_column, bool is_from_items)
+void CItemsSetup::pageTurningMoveCursor(int target_column)
 {
-	if (is_from_items) {
-		gotoxy(ITEMS_ARROW_OFFSET, line);
-	} else {
+	if (line == OPTION_LINE) {
+		gotoxy(OPTION_LINE_ARROW_OFFSET + OPTION_LINE_ARROW_INTERVAL * column, line);
+	} else if (line == PAGE_TURNING_LINE) {
 		gotoxy(PAGE_TURNING_ARROW_OFFSET + PAGE_TURNING_ARROW_INTERVAL * column, line);
+	} else {
+		gotoxy(ITEMS_ARROW_OFFSET, line);
 	}
 	cout << " ";
 	line = PAGE_TURNING_LINE;
@@ -153,7 +157,9 @@ void CItemsSetup::up()
 	if (line <= OPTION_LINE) {
 		return;
 	} else if (line == PAGE_TURNING_LINE) {
-		if (page != (items.size() - 1) / ITEMS_PER_PAGE_IN_ITEMS_SETUP) {
+		if (items.empty()) {
+			optionLineMoveCursor(0);
+		} else if (page != (items.size() - 1) / ITEMS_PER_PAGE_IN_ITEMS_SETUP) {
 			itemsLineMoveCursor(ITEMS_LINE_LAST);
 		} else {
 			itemsLineMoveCursor((items.size() - 1) % ITEMS_PER_PAGE_IN_ITEMS_SETUP + ITEMS_LINE);
@@ -170,10 +176,14 @@ void CItemsSetup::down()
 	if (line >= PAGE_TURNING_LINE) {
 		return;
 	} else if (line == OPTION_LINE) {
-		itemsLineMoveCursor(ITEMS_LINE);
+		if (items.empty()) {
+			pageTurningMoveCursor(0);
+		} else {
+			itemsLineMoveCursor(ITEMS_LINE);
+		}
 	} else if (line == ITEMS_LINE_LAST || page == items.size() / ITEMS_PER_PAGE_IN_ITEMS_SETUP
 		&& line == (items.size() - 1) % ITEMS_PER_PAGE_IN_ITEMS_SETUP + ITEMS_LINE) {
-		pageTurningMoveCursor(0, true);
+		pageTurningMoveCursor(0);
 	} else {
 		itemsLineMoveCursor(line + 1);
 	}
@@ -185,7 +195,7 @@ void CItemsSetup::left()
 		if (line == OPTION_LINE) {
 			optionLineMoveCursor(column - 1);
 		} else if (line == PAGE_TURNING_LINE) {
-			pageTurningMoveCursor(column - 1, false);
+			pageTurningMoveCursor(column - 1);
 		}
 	} else if (line >= ITEMS_LINE && line <= ITEMS_LINE_LAST) {
 		items.switchOne(items.at(ITEMS_PER_PAGE_IN_ITEMS_SETUP * page + line - ITEMS_LINE).name);
@@ -200,7 +210,7 @@ void CItemsSetup::right()
 	if (line == OPTION_LINE && column < OPTION_LINE_MAX_COLUMN) {
 		optionLineMoveCursor(column + 1);
 	} else if (line == PAGE_TURNING_LINE && column < PAGE_TURNING_LINE_MAX_COLUMN) {
-		pageTurningMoveCursor(column + 1, false);
+		pageTurningMoveCursor(column + 1);
 	} else if (line >= ITEMS_LINE && line <= ITEMS_LINE_LAST) {
 		items.switchOne(items.at(ITEMS_PER_PAGE_IN_ITEMS_SETUP * page + line - ITEMS_LINE).name);
 		displayItems(page);

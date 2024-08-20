@@ -17,7 +17,7 @@ private:
 	void displayItems(int);
 	void optionLineMoveCursor(int);
 	void itemsLineMoveCursor(int);
-	void pageTurningMoveCursor(int, bool);
+	void pageTurningMoveCursor(int);
 public:
 	CItemsSetup();
 	virtual void up();

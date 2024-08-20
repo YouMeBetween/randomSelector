@@ -33,6 +33,7 @@ public:
 	void switchOne(string);
 	int getIndex(string);
 	int size();
+	bool empty();
 	Item at(int);
 };
 #endif // !_ITEMS_H_

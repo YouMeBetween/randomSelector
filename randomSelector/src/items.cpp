@@ -205,6 +205,11 @@ int CItems::size()
 	return items.size();
 }
 
+bool CItems::empty()
+{
+	return items.empty();
+}
+
 Item CItems::at(int index)
 {
 	return items.at(index);
