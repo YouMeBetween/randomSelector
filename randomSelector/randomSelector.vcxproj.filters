@@ -63,6 +63,9 @@
     <ClCompile Include="src\editList.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="src\history.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="includes\items.h">
@@ -113,6 +116,9 @@
     <ClInclude Include="includes\editList.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="includes\history.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="res\cfg.csv">
@@ -122,6 +128,9 @@
       <Filter>资源文件</Filter>
     </None>
     <None Include="res\setting.ini">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="res\附近.csv">
       <Filter>资源文件</Filter>
     </None>
   </ItemGroup>

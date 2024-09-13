@@ -135,6 +135,7 @@
     <ClCompile Include="src\editList.cpp" />
     <ClCompile Include="src\editListBase.cpp" />
     <ClCompile Include="src\errorPrompt.cpp" />
+    <ClCompile Include="src\history.cpp" />
     <ClCompile Include="src\interfaceBase.cpp" />
     <ClCompile Include="src\items.cpp" />
     <ClCompile Include="src\itemsListSetting.cpp" />
@@ -152,6 +153,7 @@
     <ClInclude Include="includes\editList.h" />
     <ClInclude Include="includes\editListBase.h" />
     <ClInclude Include="includes\errorPrompt.h" />
+    <ClInclude Include="includes\history.h" />
     <ClInclude Include="includes\index.h" />
     <ClInclude Include="includes\interfaceBase.h" />
     <ClInclude Include="includes\items.h" />
@@ -166,6 +168,7 @@
     <None Include="res\cfg.csv" />
     <None Include="res\cfg.ini" />
     <None Include="res\setting.ini" />
+    <None Include="res\附近.csv" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

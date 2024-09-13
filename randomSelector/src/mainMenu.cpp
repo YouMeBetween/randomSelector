@@ -10,11 +10,12 @@
 using namespace std;
 
 constexpr int FIRST_LINE = 3;
-constexpr int LAST_LINE = 5;
-constexpr int FINAL_LINE = 7;
+constexpr int LAST_LINE = 6;
+constexpr int FINAL_LINE = 8;
 constexpr int RESULT_SHOW_LINE = 3;
-constexpr int SETTING_LINE = 4;
-constexpr int QUIT_LINE = 5;
+constexpr int HISTORY_LINE = 4;
+constexpr int SETTING_LINE = 5;
+constexpr int QUIT_LINE = 6;
 constexpr int ARROW_OFFSET = 8;
 
 void CMainMenu::printMenu()
@@ -24,8 +25,9 @@ void CMainMenu::printMenu()
 	cout << "*            主菜单            *\n";
 	cout << "********************************\n";
 	cout << "*         1.开始选择           *\n";
-	cout << "*         2.设置               *\n";
-	cout << "*         3.退出               *\n";
+	cout << "*         2.历史记录           *\n";
+	cout << "*         3.设置               *\n";
+	cout << "*         4.退出               *\n";
 	cout << "********************************\n";
 	return;
 }
@@ -95,6 +97,10 @@ void CMainMenu::enter(int &next_interface, int &cursor_line)
 		case RESULT_SHOW_LINE: {
 			startChoose();
 			nextInterfaceSet(next_interface, cursor_line, RESULT_SHOW_INDEX, NO_LINE);
+			break;
+		}
+		case HISTORY_LINE: {
+			nextInterfaceSet(next_interface, cursor_line, HISTORY_INDEX, NO_LINE);
 			break;
 		}
 		case SETTING_LINE: {
